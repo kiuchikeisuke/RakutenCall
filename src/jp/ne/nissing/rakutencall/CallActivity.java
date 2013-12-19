@@ -2,6 +2,7 @@ package jp.ne.nissing.rakutencall;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -37,7 +38,12 @@ public class CallActivity extends Activity{
     }
     
     private boolean needPrefixTel(String telNum){
-        if(telNum.startsWith(PREFIX_TELNUM) /*ここに無視リストに含まれているかどうかをチェックする*/){
+    	DatabaseManager db = DatabaseManager.getInstance(this).open();
+    	Cursor cursor = db.getContact(new ContactsData(telNum, null, null));
+    	boolean isIgnoreTelNumber = cursor.moveToNext();
+    	db.close();
+    	
+        if(telNum.startsWith(PREFIX_TELNUM) || isIgnoreTelNumber){
             return false;
         }
         return true;

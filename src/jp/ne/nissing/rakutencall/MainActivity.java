@@ -28,7 +28,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-//        String[] projection = new String[]{Phone.NUMBER,Phone.CONTACT_ID};
 
         ContentResolver cr = getContentResolver();
         Cursor dataAddressTable = cr.query(
@@ -89,6 +88,18 @@ public class MainActivity extends Activity {
         // カーソルを閉じる
         dataNameTable.close();
 
+        DatabaseManager db = DatabaseManager.getInstance(this).open();
+        Cursor cursor = db.getContacts();
+        while(cursor.moveToNext()){
+        	String telNum = cursor.getString(cursor.getColumnIndex(DatabaseManager.COL_TEL_NUMBER));
+        	for(ContactsData contact : listItems){
+        		if(contact.getTelNumber().equals(telNum)){
+        			contact.setIgnored(true);
+        			break;
+        		}
+        	}
+        }
+        
         //リスト生成
         ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
         mContactsAdapter = new ContactsAdapter(this,0,listItems);

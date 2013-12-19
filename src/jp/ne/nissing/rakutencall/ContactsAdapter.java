@@ -4,8 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.List;
 
@@ -33,6 +32,9 @@ public class ContactsAdapter extends ArrayAdapter<ContactsData>{
         
         TextView telNumber = (TextView) convertView.findViewById(R.id.telNumber);
         telNumber.setText(item.getTelNumber());
+        
+        CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+        checkBox.setChecked(item.isIgnored());
         
         return convertView;
     }
