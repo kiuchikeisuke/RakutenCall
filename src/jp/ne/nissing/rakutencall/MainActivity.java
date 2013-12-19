@@ -1,23 +1,21 @@
 package jp.ne.nissing.rakutencall;
 
+import java.util.*;
+
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
+import android.content.*;
+import android.content.pm.*;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
+import android.view.*;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CheckBox;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -29,6 +27,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mContext = this;
 
+
+        
+        
+        
+        
+        
         ContentResolver cr = getContentResolver();
         Cursor dataAddressTable = cr.query(
                 Phone.CONTENT_URI,
@@ -125,5 +129,36 @@ public class MainActivity extends Activity {
             }
         });
     }
+    
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		menu.add(Menu.NONE, Menu.FIRST, Menu.NONE, R.string.action_settings);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch(item.getItemId()){
+		case Menu.FIRST:
+	        PackageManager pm = getPackageManager();
+	        Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"));
+	        intent.addCategory(Intent.CATEGORY_DEFAULT);
+	        List<ResolveInfo> activities = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+	        
+	        for(ResolveInfo act : activities){
+	        	act.loadLabel(pm).toString();
+	        	Drawable icon = act.loadIcon(pm);
+	        }
+	        
+			break;
+		default:
+			break;
+		}
+		
+		return super.onOptionsItemSelected(item);
+	}
 
 }

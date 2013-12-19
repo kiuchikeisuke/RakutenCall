@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">楽天Call</string>
-    <string name="action_settings">設定</string>
+    <string name="app_name">楽天コール</string>
+    <string name="action_settings">電話アプリ設定</string>
     <string name="ignore_list_title">変換対象に含めないものをチェックしてください</string>
 
 </resources>
