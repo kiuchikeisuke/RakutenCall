@@ -2,6 +2,7 @@ package jp.ne.nissing.rakutencall;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -21,12 +22,12 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private ContactsAdapter mContactsAdapter = null;
-
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mContext = this;
 //        String[] projection = new String[]{Phone.NUMBER,Phone.CONTACT_ID};
 
         ContentResolver cr = getContentResolver();
@@ -101,6 +102,15 @@ public class MainActivity extends Activity {
                 CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
                 checkBox.setChecked(!checkBox.isChecked());
                 ContactsData data = mContactsAdapter.getItem(position);
+                
+                DatabaseManager db = DatabaseManager.getInstance(mContext).open();
+                if(checkBox.isChecked()){
+                    db.updateTargetContact(data);
+                }
+                else{
+                    db.deleteTargetContact(data);
+                }
+                db.close();
             }
         });
     }
