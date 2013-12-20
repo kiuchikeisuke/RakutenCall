@@ -27,30 +27,24 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mContext = this;
 
-
-        
-        
-        
-        
-        
         ContentResolver cr = getContentResolver();
         Cursor dataAddressTable = cr.query(
                 Phone.CONTENT_URI,
                 null,
                 Data.MIMETYPE + " = ?",
-                new String[]{Phone.CONTENT_ITEM_TYPE},
-                null,
-                null);
+                        new String[]{Phone.CONTENT_ITEM_TYPE},
+                        null,
+                        null);
 
         // ハッシュ変数にアドレスを格納(id, address)
         HashMap<String, ContactsData> contactsHash = new HashMap<String, ContactsData>();
         List<ContactsData> tempList = new ArrayList<ContactsData>();
         while(dataAddressTable.moveToNext()) {
-            
+
             String id = dataAddressTable.getString(dataAddressTable.getColumnIndex(Data.CONTACT_ID));
             String telNumber = dataAddressTable.getString(dataAddressTable.getColumnIndex(Data.DATA1));
             ContactsData contactsData = new ContactsData(telNumber, null, id);
-            
+
             contactsHash.put(telNumber,contactsData);
             tempList.add(contactsData);
         }
@@ -82,7 +76,7 @@ public class MainActivity extends Activity {
         while(dataNameTable.moveToNext()) {
             String id = dataNameTable.getString(dataNameTable.getColumnIndex(Data.CONTACT_ID));
             String displayName = dataNameTable.getString(dataNameTable.getColumnIndex(Data.DISPLAY_NAME));
-            
+
             for(ContactsData item :tempList){
                 if(item.getContactsId().equals(id)){
                     listItems.add(new ContactsData(item.getTelNumber(), displayName, id));
@@ -95,15 +89,15 @@ public class MainActivity extends Activity {
         DatabaseManager db = DatabaseManager.getInstance(this).open();
         Cursor cursor = db.getContacts();
         while(cursor.moveToNext()){
-        	String telNum = cursor.getString(cursor.getColumnIndex(DatabaseManager.COL_TEL_NUMBER));
-        	for(ContactsData contact : listItems){
-        		if(contact.getTelNumber().equals(telNum)){
-        			contact.setIgnored(true);
-        			break;
-        		}
-        	}
+            String telNum = cursor.getString(cursor.getColumnIndex(DatabaseManager.COL_TEL_NUMBER));
+            for(ContactsData contact : listItems){
+                if(contact.getTelNumber().equals(telNum)){
+                    contact.setIgnored(true);
+                    break;
+                }
+            }
         }
-        
+
         //リスト生成
         ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
         mContactsAdapter = new ContactsAdapter(this,0,listItems);
@@ -117,7 +111,7 @@ public class MainActivity extends Activity {
                 CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
                 checkBox.setChecked(!checkBox.isChecked());
                 ContactsData data = mContactsAdapter.getItem(position);
-                
+
                 DatabaseManager db = DatabaseManager.getInstance(mContext).open();
                 if(checkBox.isChecked()){
                     db.updateTargetContact(data);
@@ -129,36 +123,36 @@ public class MainActivity extends Activity {
             }
         });
     }
-    
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		menu.add(Menu.NONE, Menu.FIRST, Menu.NONE, R.string.action_settings);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		
-		switch(item.getItemId()){
-		case Menu.FIRST:
-	        PackageManager pm = getPackageManager();
-	        Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"));
-	        intent.addCategory(Intent.CATEGORY_DEFAULT);
-	        List<ResolveInfo> activities = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-	        
-	        for(ResolveInfo act : activities){
-	        	act.loadLabel(pm).toString();
-	        	Drawable icon = act.loadIcon(pm);
-	        }
-	        
-			break;
-		default:
-			break;
-		}
-		
-		return super.onOptionsItemSelected(item);
-	}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.add(Menu.NONE, Menu.FIRST, Menu.NONE, R.string.action_settings);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+        case Menu.FIRST:
+            PackageManager pm = getPackageManager();
+            Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"));
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            List<ResolveInfo> activities = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+            for(ResolveInfo act : activities){
+                act.loadLabel(pm).toString();
+                Drawable icon = act.loadIcon(pm);
+            }
+
+            break;
+        default:
+            break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }
