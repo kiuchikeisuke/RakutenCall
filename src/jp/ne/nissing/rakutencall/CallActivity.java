@@ -59,5 +59,6 @@ public class CallActivity extends Activity{
         }
         
         startActivity(intent);
+        finish();
     }
 }
