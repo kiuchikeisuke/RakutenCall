@@ -2,8 +2,9 @@ package jp.ne.nissing.rakutencall;
 
 import java.util.*;
 
-import android.app.Activity;
+import android.app.*;
 import android.content.*;
+import android.content.DialogInterface.OnClickListener;
 import android.content.pm.*;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -21,12 +22,13 @@ public class MainActivity extends Activity {
 
     private ContactsAdapter mContactsAdapter = null;
     private Context mContext;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-
+        
         ContentResolver cr = getContentResolver();
         Cursor dataAddressTable = cr.query(
                 Phone.CONTENT_URI,
@@ -97,7 +99,6 @@ public class MainActivity extends Activity {
                 }
             }
         }
-
         //リスト生成
         ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
         mContactsAdapter = new ContactsAdapter(this,0,listItems);
@@ -127,7 +128,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
         menu.add(Menu.NONE, Menu.FIRST, Menu.NONE, R.string.action_settings);
         return true;
     }
@@ -141,12 +142,38 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"));
             intent.addCategory(Intent.CATEGORY_DEFAULT);
             List<ResolveInfo> activities = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-
+            final List<PhoneActivityData> lists = new ArrayList<PhoneActivityData>();
+            PhoneActivityData defaultPhoneAppData = SharedPreferenceManager.getInstance(this).getDefaultPhoneApp();
+            int defaultPhoneAppIndex = 0;
+                        
             for(ResolveInfo act : activities){
-                act.loadLabel(pm).toString();
+                String label = act.loadLabel(pm).toString();
                 Drawable icon = act.loadIcon(pm);
+                String packageName = act.activityInfo.packageName;
+                String activityName = act.activityInfo.name;
+                if(packageName.equals("jp.ne.nissing.rakutencall"))
+                	continue;
+                PhoneActivityData data = new PhoneActivityData(label,icon,packageName,activityName);
+                if(packageName.equals(defaultPhoneAppData.getPackageName()) && activityName.equals(defaultPhoneAppData.getAcitivityName()) ){
+                	defaultPhoneAppIndex = lists.size() - 1;
+                	data.setSelected(true);
+                }
+                lists.add(data);
             }
 
+            PhoneActivityDataAdapter adapter = new PhoneActivityDataAdapter(this, 0, lists);
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(R.string.phone_app_list);
+            alert.setSingleChoiceItems(adapter, defaultPhoneAppIndex, new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					PhoneActivityData phoneActivityData = lists.get(which);
+					SharedPreferenceManager.getInstance(mContext).setDefaultPhoneApp(phoneActivityData.getPackageName(),phoneActivityData.getAcitivityName());
+					dialog.cancel();
+				}
+			});
+            alert.show();
             break;
         default:
             break;

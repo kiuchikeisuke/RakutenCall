@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 public class CallActivity extends Activity{
 
@@ -51,6 +52,12 @@ public class CallActivity extends Activity{
     
     private void callPhone(String tel){
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(tel));
+        
+        PhoneActivityData data = SharedPreferenceManager.getInstance(this).getDefaultPhoneApp();
+        if(TextUtils.isEmpty(data.getPackageName()) == false && TextUtils.isEmpty(data.getAcitivityName()) == false){
+        	intent.setClassName(data.getPackageName(), data.getAcitivityName());
+        }
+        
         startActivity(intent);
     }
 }
