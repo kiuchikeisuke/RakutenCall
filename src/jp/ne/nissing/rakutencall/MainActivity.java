@@ -35,7 +35,6 @@ public class MainActivity extends Activity {
                 null,
                 Data.MIMETYPE + " = ?",
                         new String[]{Phone.CONTENT_ITEM_TYPE},
-                        null,
                         null);
 
         // ハッシュ変数にアドレスを格納(id, address)
