@@ -15,6 +15,8 @@
         android:layout_column="0"
         android:layout_gravity="center"
         android:layout_row="0"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:paddingBottom="3dp"
         android:paddingLeft="5dp"
         android:paddingTop="3dp"
@@ -28,6 +30,10 @@
         android:layout_columnSpan="2"
         android:layout_gravity="center"
         android:layout_row="0"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:maxLines="1"
+        android:minLines="1"
         android:paddingLeft="5dp"
         android:text="appName"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -41,6 +47,7 @@
 	    android:layout_row="0"
 	    android:clickable="false"
 	    android:focusable="false"
+	    android:focusableInTouchMode="false"
 	    android:paddingRight="5dp" />
 
 </GridLayout>

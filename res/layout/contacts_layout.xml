@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
     android:orientation="horizontal" >
 
     <CheckBox
@@ -10,23 +12,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
+        android:focusableInTouchMode="false"
         android:focusable="false"
          />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
+        android:focusableInTouchMode="false"
+        android:focusable="false"
         android:orientation="vertical">
     <TextView
         android:id="@+id/displayName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="displayName"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:minLines="1"
+        android:maxLines="1"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/telNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:maxLines="1"
+        android:minLines="1"
         android:text="telNumber"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

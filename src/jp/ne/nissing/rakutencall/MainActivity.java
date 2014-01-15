@@ -102,7 +102,6 @@ public class MainActivity extends Activity {
         ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
         mContactsAdapter = new ContactsAdapter(this,0,listItems);
 
-        ignoreListView.setAdapter(mContactsAdapter);
         ignoreListView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
@@ -122,6 +121,7 @@ public class MainActivity extends Activity {
                 db.close();
             }
         });
+        ignoreListView.setAdapter(mContactsAdapter);
     }
 
     @Override

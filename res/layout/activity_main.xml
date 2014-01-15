@@ -19,13 +19,18 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:minLines="1"
             android:text="@string/ignore_list_title" />
 
         <ListView
             android:id="@+id/ignoreListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:choiceMode="multipleChoice" >
+            android:choiceMode="multipleChoice"
+            android:focusable="false"
+            android:focusableInTouchMode="false" >
+
         </ListView>
 
     </LinearLayout>
