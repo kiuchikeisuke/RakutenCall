@@ -27,6 +27,7 @@
             android:theme="@android:style/Theme.NoTitleBar">
                 <intent-filter >
                     <action android:name="android.intent.action.CALL"/>
+                    <action android:name="android.intent.action.CALL_PRIVILEGED"/>
                     <category android:name="android.intent.category.DEFAULT"/>
                     <data android:scheme="tel"/>
                 </intent-filter>
