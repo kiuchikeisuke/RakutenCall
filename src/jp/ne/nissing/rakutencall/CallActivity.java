@@ -10,7 +10,6 @@ import android.text.TextUtils;
 public class CallActivity extends Activity{
 
     private final String TEL = "tel:";
-    private final String PREFIX_TELNUM = "003768";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +30,7 @@ public class CallActivity extends Activity{
         String telNumber = uri.toString().substring(TEL.length());
         
         if(needPrefixTel(telNumber) == true){
-            callPhone(TEL + PREFIX_TELNUM + telNumber);
+            callPhone(TEL + SharedPreferenceManager.getInstance(this).getDefaultPrefixNum() + telNumber);
         }
         else{
             callPhone(TEL + telNumber);
@@ -44,7 +43,7 @@ public class CallActivity extends Activity{
     	boolean isIgnoreTelNumber = cursor.moveToNext();
     	db.close();
     	
-        if(telNum.startsWith(PREFIX_TELNUM) || isIgnoreTelNumber){
+        if(telNum.startsWith(SharedPreferenceManager.getInstance(this).getDefaultPrefixNum()) || isIgnoreTelNumber){
             return false;
         }
         return true;
