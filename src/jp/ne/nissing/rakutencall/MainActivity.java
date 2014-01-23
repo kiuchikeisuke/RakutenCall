@@ -14,7 +14,7 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
-import android.text.InputType;
+import android.text.*;
 import android.util.Log;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
@@ -177,7 +177,7 @@ public class MainActivity extends Activity {
 				String inputString = editView.getText().toString();
 				
 				//ASCII文字列範囲内かチェック。範囲外なら反映せず終了
-				if(inputString.matches(MATCH_ASCII) == false){
+				if(TextUtils.isEmpty(inputString) == false && inputString.matches(MATCH_ASCII) == false){
 					Toast.makeText(mContext, R.string.dialog_prefix_num_error, Toast.LENGTH_LONG).show();
 					dialog.cancel();
 					dialog.dismiss();
