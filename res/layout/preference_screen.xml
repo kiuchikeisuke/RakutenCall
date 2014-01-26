@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference android:key="package_name"
+        android:title="@string/menu_action_settings"/>
+    <EditTextPreference android:key="prefix_num"
+        android:title="@string/menu_prefix_num_setting"></EditTextPreference>
+
+</PreferenceScreen>
