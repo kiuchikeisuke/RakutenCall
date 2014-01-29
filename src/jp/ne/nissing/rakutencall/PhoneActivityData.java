@@ -3,51 +3,51 @@ package jp.ne.nissing.rakutencall;
 import android.graphics.drawable.Drawable;
 
 public class PhoneActivityData {
-	private String mApplicationName;
-	private Drawable mIcon;
-	private String mPackageName;
-	private String mAcitivityName;
-	private boolean isSelected = false;
-	
-	public PhoneActivityData(String applicationName, Drawable icon, String packageName, String activityName){
-		this.mApplicationName = applicationName;
-		this.mIcon = icon;
-		this.mPackageName = packageName;
-		this.mAcitivityName = activityName;
-	}
-	
-	public String getApplicationName() {
-		return mApplicationName;
-	}
-	public void setApplicationName(String ApplicationName) {
-		this.mApplicationName = ApplicationName;
-	}
-	public Drawable getIcon() {
-		return mIcon;
-	}
-	public void setIcon(Drawable mIcon) {
-		this.mIcon = mIcon;
-	}
-	public String getPackageName() {
-		return mPackageName;
-	}
-	public void setPackageName(String mPackageName) {
-		this.mPackageName = mPackageName;
-	}
+    private String mApplicationName;
+    private Drawable mIcon;
+    private String mPackageName;
+    private String mAcitivityName;
+    private boolean isSelected = false;
 
-	public String getAcitivityName() {
-		return mAcitivityName;
-	}
+    public PhoneActivityData(String applicationName, Drawable icon, String packageName, String activityName){
+        this.mApplicationName = applicationName;
+        this.mIcon = icon;
+        this.mPackageName = packageName;
+        this.mAcitivityName = activityName;
+    }
 
-	public void setAcitivityName(String mAcitivityName) {
-		this.mAcitivityName = mAcitivityName;
-	}
+    public String getApplicationName() {
+        return mApplicationName;
+    }
+    public void setApplicationName(String ApplicationName) {
+        this.mApplicationName = ApplicationName;
+    }
+    public Drawable getIcon() {
+        return mIcon;
+    }
+    public void setIcon(Drawable mIcon) {
+        this.mIcon = mIcon;
+    }
+    public String getPackageName() {
+        return mPackageName;
+    }
+    public void setPackageName(String mPackageName) {
+        this.mPackageName = mPackageName;
+    }
 
-	public boolean isSelected() {
-		return isSelected;
-	}
+    public String getAcitivityName() {
+        return mAcitivityName;
+    }
 
-	public void setSelected(boolean isSelected) {
-		this.isSelected = isSelected;
-	}
+    public void setAcitivityName(String mAcitivityName) {
+        this.mAcitivityName = mAcitivityName;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 }
