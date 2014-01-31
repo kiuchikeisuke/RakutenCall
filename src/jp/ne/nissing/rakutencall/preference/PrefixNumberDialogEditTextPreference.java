@@ -24,15 +24,9 @@ public class PrefixNumberDialogEditTextPreference extends EditTextPreference {
     }
 
     private void init() {
-        this.setSummary(SharedPreferenceManager.getInstance(mContext).getDefaultPrefixNum());
+        setPrefixNum(SharedPreferenceManager.getInstance(mContext).getDefaultPrefixNum());
     }
     
-    @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        this.persistString(restoreValue ? SharedPreferenceManager.getInstance(mContext).getDefaultPrefixNum() : (String)defaultValue);
-        super.onSetInitialValue(restoreValue, defaultValue);
-    }
-
     @Override
     protected View onCreateDialogView() {
         EditText editView = this.getEditText();
@@ -63,9 +57,14 @@ public class PrefixNumberDialogEditTextPreference extends EditTextPreference {
                         mContext.getString(R.string.toast_prefix_num_setend, SharedPreferenceManager
                                 .getInstance(mContext).getDefaultPrefixNum()), Toast.LENGTH_LONG)
                         .show();
-                this.setSummary(prefixNum);
+                setPrefixNum(prefixNum);
             }
         }
         super.onDialogClosed(positiveResult);
+    }
+    
+    private void setPrefixNum(String prefixNum){
+        this.setSummary(prefixNum);
+        this.persistString(prefixNum);
     }
 }
