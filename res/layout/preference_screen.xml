@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <ListPreference android:key="package_name"
+    <jp.ne.nissing.rakutencall.preference.PhoneAppDialogListPreference
         android:title="@string/preference_action_settings"/>
-    <EditTextPreference android:key="prefix_num"
-        android:title="@string/preference_prefix_num_setting"></EditTextPreference>
+    <jp.ne.nissing.rakutencall.preference.PrefixNumberDialogEditTextPreference 
+        android:title="@string/preference_prefix_num_setting"/>
 
 </PreferenceScreen>

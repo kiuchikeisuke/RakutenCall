@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall;
+package jp.ne.nissing.rakutencall.activity;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -17,6 +17,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.ListView;
+
+import jp.ne.nissing.rakutencall.R;
+import jp.ne.nissing.rakutencall.adapter.ContactsAdapter;
+import jp.ne.nissing.rakutencall.data.ContactsData;
+import jp.ne.nissing.rakutencall.util.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;

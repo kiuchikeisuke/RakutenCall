@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">らくでん</string>
-    <string name="preference_action_settings">電話アプリ設定</string>
+    <string name="preference_action_settings">電話アプリ</string>
     <string name="ignore_list_title">変換対象に含めないものをチェックしてください</string>
     <string name="phone_app_list">起動させる電話アプリを選択</string>
-    <string name="preference_prefix_num_setting">プレフィックス番号設定</string>
+    <string name="preference_prefix_num_setting">プレフィックス番号</string>
     <string name="dialog_prefix_num_error">無効な文字列が存在したため反映できませんでした</string>
     <string name="dialog_prefix_num_title">先頭につける番号を入力</string>
     <string name="dialog_prefix_num_hint">空欄は「003768」</string>

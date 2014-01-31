@@ -15,22 +15,18 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="jp.ne.nissing.rakutencall.MainActivity"
+            android:name="jp.ne.nissing.rakutencall.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="jp.ne.nissing.rakutencall.PreferenceActivity"
+        <activity android:name="jp.ne.nissing.rakutencall.activity.PreferenceActivity"
             android:label="@string/menu_setting">
-            <intent-filter >
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity 
-            android:name="jp.ne.nissing.rakutencall.CallActivity"
+            android:name="jp.ne.nissing.rakutencall.activity.CallActivity"
             android:theme="@android:style/Theme.NoTitleBar">
                 <intent-filter >
                     <action android:name="android.intent.action.CALL"/>

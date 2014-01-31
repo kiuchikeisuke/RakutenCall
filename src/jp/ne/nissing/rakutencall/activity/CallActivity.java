@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall;
+package jp.ne.nissing.rakutencall.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+
+import jp.ne.nissing.rakutencall.data.ContactsData;
+import jp.ne.nissing.rakutencall.data.PhoneActivityData;
+import jp.ne.nissing.rakutencall.preference.SharedPreferenceManager;
+import jp.ne.nissing.rakutencall.util.DatabaseManager;
 
 public class CallActivity extends Activity {
 
