@@ -16,14 +16,19 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
         addPreferencesFromResource(R.layout.preference_screen);
         
         AdBuddiz.cacheAds(this);
-        if(SharedPreferenceManager.getInstance(this).getIsAdbuddizHide() == false){
-            showAdBuddiz();
-        }
     }
 
     private void showAdBuddiz() {
         AdBuddiz.showAd(this);
-        Toast.makeText(this,R.string.toast_adbuddiz_show,Toast.LENGTH_LONG).show();
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        if(SharedPreferenceManager.getInstance(this).getIsAdbuddizHide() == false){
+            showAdBuddiz();
+        }
     }
     
     @Override
