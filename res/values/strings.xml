@@ -11,5 +11,10 @@
     <string name="dialog_prefix_num_hint">空欄は「003768」</string>
     <string name="toast_prefix_num_setend">「%s」をプレフィックスの番号として設定しました</string>
     <string name="menu_setting">設定</string>
+    <string name="preference_free_dial_title">フリーダイアル(0120)</string>
+    <string name="checkbox_free_dial_summary_on">フリーダイアルは自動で無視する</string>
+    <string name="checkbox_free_dial_summary_off">フリーダイアルは自動で無視しない</string>
+    <string name="toast_free_dial_on">フリーダイアルは自動でプレフィックスをつけない設定になりました</string>
+    <string name="toast_free_dial_off">フリーダイアルでも自動でプレフィックスをつける設定になりました</string>
 
 </resources>

@@ -19,7 +19,7 @@ public class PrefixNumberDialogEditTextPreference extends EditTextPreference {
     public PrefixNumberDialogEditTextPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        this.setKey(SharedPreferenceManager.DEFAULT_VALUE_PREFIX_NUM);
+        this.setKey(SharedPreferenceManager.KEY_PREFIX_NUM);
         init();
     }
 

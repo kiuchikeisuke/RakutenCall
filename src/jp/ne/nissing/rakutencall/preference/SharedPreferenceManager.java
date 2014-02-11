@@ -14,9 +14,12 @@ public class SharedPreferenceManager {
     static final String KEY_PACKAGE = "package_name";
     static final String KEY_ACTIVITY = "activity_name";
     static final String KEY_PREFIX_NUM = "prefix_num";
+    static final String KEY_FREE_DIAL = "free_dial";
+    
     static final String DEFAULT_VALUE_PACKAGE = "com.android.phone";
     static final String DEFALUT_VALUE_ACTIVITY = "com.android.phone.OutgoingCallBroadcaster";
     static final String DEFAULT_VALUE_PREFIX_NUM = "003768";
+    static final boolean DEFAULT_VALUE_FREE_DIAL = false;
 
     public static SharedPreferenceManager getInstance(Context context){
         if(instance == null){
@@ -49,5 +52,14 @@ public class SharedPreferenceManager {
 
     public String getDefaultPrefixNum(){
         return pref.getString(KEY_PREFIX_NUM, DEFAULT_VALUE_PREFIX_NUM);
+    }
+    
+    public void setFreeDialCheck(boolean value){
+        editor.putBoolean(KEY_FREE_DIAL, value);
+        editor.commit();
+    }
+    
+    public boolean getFreeDialCheck(){
+        return pref.getBoolean(KEY_FREE_DIAL, DEFAULT_VALUE_FREE_DIAL);
     }
 }

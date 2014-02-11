@@ -27,7 +27,7 @@ public class PhoneAppDialogListPreference extends ListPreference {
     public PhoneAppDialogListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        this.setKey(SharedPreferenceManager.DEFALUT_VALUE_ACTIVITY);
+        this.setKey(SharedPreferenceManager.KEY_PACKAGE);
         init();
     }
     
