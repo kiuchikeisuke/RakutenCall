@@ -26,13 +26,8 @@
         <ListView
             android:id="@+id/ignoreListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:choiceMode="multipleChoice"
-            android:focusable="false"
-            android:focusableInTouchMode="false" >
-
+            android:layout_height="wrap_content" >
         </ListView>
-
     </LinearLayout>
 
 </RelativeLayout>
