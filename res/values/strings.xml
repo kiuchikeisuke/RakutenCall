@@ -16,7 +16,7 @@
     <string name="checkbox_free_dial_summary_off">フリーダイアルは自動で無視しない</string>
     <string name="toast_free_dial_on">フリーダイアルは自動でプレフィックスをつけない設定になりました</string>
     <string name="toast_free_dial_off">フリーダイアルでも自動でプレフィックスをつける設定になりました</string>
-    <string name="preference_adbuddiz_title">広告の表示設定</string>
+    <string name="preference_adbuddiz_title">広告の非表示設定</string>
     <string name="checkbox_adbuddiz_summary_on">非表示</string>
     <string name="checkbox_adbuddiz_summary_off">表示</string>
     <string name="toast_adbuddiz_on">広告を表示しません</string>
