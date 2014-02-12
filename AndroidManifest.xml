@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jp.ne.nissing.rakutencall"
-    android:versionCode="3"
-    android:versionName="1.1.1" >
+    android:versionCode="4"
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -54,12 +54,12 @@
         <meta-data
             android:name="ADBUDDIZ_PUBLISHER_KEY"
             android:value="45aeacd1-acc1-4f40-89e2-4ab6b378a11e" />
-        <meta-data
+        <!--meta-data
             android:name="ADBUDDIZ_TEST_MODE"
-            android:value="true" />
-        <meta-data
+            android:value="true" /-->
+        <!--meta-data
             android:name="SHOW_ADBUDDIZ_LOG"
-            android:value="true" />
+            android:value="true" /-->
      <activity android:name="com.purplebrain.adbuddiz.sdk.AdBuddizActivity" 
                android:theme="@android:style/Theme.Translucent" />
     </application>
