@@ -4,11 +4,11 @@ import java.util.List;
 
 import jp.ne.nissing.rakutencall.R;
 import jp.ne.nissing.rakutencall.adapter.ContactsAdapter;
-import jp.ne.nissing.rakutencall.component.InnerCheckBox;
 import jp.ne.nissing.rakutencall.data.ContactsData;
 import jp.ne.nissing.rakutencall.util.*;
 import android.app.Activity;
 import android.content.*;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -45,14 +45,13 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-                InnerCheckBox checkBox = (InnerCheckBox) view
-                        .findViewById(R.id.checkBox);
                 ContactsData data = mContactsAdapter.getItem(position);
 
                 DatabaseManager db = DatabaseManager.getInstance(mContext)
                         .open();
-                boolean newCheckValue = !checkBox.isChecked();
-                if (newCheckValue) {
+                Cursor cursor = db.getContact(data);
+                boolean containsDb = cursor.moveToNext();
+                if (containsDb == false) {
                     db.updateTargetContact(data);
                 } else {
                     db.deleteTargetContact(data);

@@ -54,12 +54,12 @@
         <meta-data
             android:name="ADBUDDIZ_PUBLISHER_KEY"
             android:value="45aeacd1-acc1-4f40-89e2-4ab6b378a11e" />
-        <!--meta-data
+        <meta-data
             android:name="ADBUDDIZ_TEST_MODE"
-            android:value="true" /-->
-        <!--meta-data
+            android:value="true" />
+        <meta-data
             android:name="SHOW_ADBUDDIZ_LOG"
-            android:value="true" /-->
+            android:value="true" />
      <activity android:name="com.purplebrain.adbuddiz.sdk.AdBuddizActivity" 
                android:theme="@android:style/Theme.Translucent" />
     </application>
