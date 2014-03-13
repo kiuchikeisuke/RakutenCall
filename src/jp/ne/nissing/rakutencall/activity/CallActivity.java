@@ -54,7 +54,8 @@ public class CallActivity extends Activity {
         boolean isIgnoreTelNumber = cursor.moveToNext();
         db.close();
 
-        if (telNum.startsWith(SharedPreferenceManager.getInstance(this).getDefaultPrefixNum()) //Prefixナンバーで開始しているかどうか
+        if (SharedPreferenceManager.getInstance(this).getPrefixEnable() == false
+                || telNum.startsWith(SharedPreferenceManager.getInstance(this).getDefaultPrefixNum()) //Prefixナンバーで開始しているかどうか
                 || isIgnoreTelNumber   //無視リスト候補の番号かどうか
                 || needIgnoreFreedial(telNum)) { //フリーダイアル無視設定でかつフリーダイアルの番号かどうか
             return false;

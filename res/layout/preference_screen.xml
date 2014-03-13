@@ -2,10 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <jp.ne.nissing.rakutencall.preference.PhoneAppDialogListPreference
         android:title="@string/preference_action_settings"/>
+    <jp.ne.nissing.rakutencall.preference.PrefixEnableCheckBoxPreference
+        android:key="prefix_enable"
+        android:title="@string/preference_prefix_title"/>
     <jp.ne.nissing.rakutencall.preference.PrefixNumberDialogEditTextPreference 
-        android:title="@string/preference_prefix_num_setting"/>
+        android:title="@string/preference_prefix_num_setting"
+        android:dependency="prefix_enable"/>
     <jp.ne.nissing.rakutencall.preference.FreeDialogCheckBoxPreference
-        android:title="@string/preference_free_dial_title"/>
+        android:title="@string/preference_free_dial_title"
+        android:dependency="prefix_enable"/>
     <jp.ne.nissing.rakutencall.preference.AdBuddizCheckBoxPreference
         android:title="@string/preference_adbuddiz_title" />
 </PreferenceScreen>

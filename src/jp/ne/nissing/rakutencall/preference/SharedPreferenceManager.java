@@ -16,12 +16,14 @@ public class SharedPreferenceManager {
     static final String KEY_PREFIX_NUM = "prefix_num";
     static final String KEY_FREE_DIAL = "free_dial";
     static final String KEY_ADBUDDIZ = "show_adbuddiz";
+    static final String KEY_PREFIX_ENABLE = "prefix_enable";
     
     static final String DEFAULT_VALUE_PACKAGE = "com.android.phone";
     static final String DEFALUT_VALUE_ACTIVITY = "com.android.phone.OutgoingCallBroadcaster";
     static final String DEFAULT_VALUE_PREFIX_NUM = "003768";
     static final boolean DEFAULT_VALUE_FREE_DIAL = false;
     static final boolean DEFAULT_VALUE_ADBUDDIZ = false;
+    static final boolean DEFAULT_VALUE_PREFIX_ENABLE = true;
 
     public static SharedPreferenceManager getInstance(Context context){
         if(instance == null){
@@ -72,5 +74,14 @@ public class SharedPreferenceManager {
     
     public boolean getIsAdbuddizHide() {
         return pref.getBoolean(KEY_ADBUDDIZ, DEFAULT_VALUE_ADBUDDIZ);
+    }
+    
+    public boolean getPrefixEnable(){
+        return pref.getBoolean(KEY_PREFIX_ENABLE, DEFAULT_VALUE_PREFIX_ENABLE);
+    }
+    
+    public void setPrefixEnable(boolean value){
+        editor.putBoolean(KEY_PREFIX_ENABLE, value);
+        editor.commit();
     }
 }
