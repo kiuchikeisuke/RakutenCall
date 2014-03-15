@@ -1,8 +1,9 @@
-package jp.ne.nissing.rakutencall.util;
+package jp.ne.nissing.rakutencall.contacts;
 
 import java.util.*;
 
-import jp.ne.nissing.rakutencall.data.ContactsData;
+import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
+import jp.ne.nissing.rakutencall.db.DatabaseManager;
 import android.content.*;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;

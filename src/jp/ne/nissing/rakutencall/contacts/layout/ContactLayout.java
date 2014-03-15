@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall.layout;
+package jp.ne.nissing.rakutencall.contacts.layout;
 
 import java.util.*;
 

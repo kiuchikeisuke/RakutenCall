@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall.data;
+package jp.ne.nissing.rakutencall.preference.phoneappdata;
 
 import android.graphics.drawable.Drawable;
 

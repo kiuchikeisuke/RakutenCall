@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall.activity;
+package jp.ne.nissing.rakutencall.preference;
 
 import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import jp.ne.nissing.rakutencall.R;
-import jp.ne.nissing.rakutencall.preference.SharedPreferenceManager;
 
 public class PreferenceActivity extends android.preference.PreferenceActivity {
 

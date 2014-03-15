@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall.adapter;
+package jp.ne.nissing.rakutencall.preference.phoneappdata;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import jp.ne.nissing.rakutencall.R;
-import jp.ne.nissing.rakutencall.data.PhoneActivityData;
 
 import java.util.List;
 

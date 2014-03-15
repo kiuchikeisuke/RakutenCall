@@ -13,8 +13,7 @@ import android.preference.ListPreference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import jp.ne.nissing.rakutencall.adapter.PhoneActivityDataAdapter;
-import jp.ne.nissing.rakutencall.data.PhoneActivityData;
+import jp.ne.nissing.rakutencall.preference.phoneappdata.*;
 
 import java.util.ArrayList;
 import java.util.List;

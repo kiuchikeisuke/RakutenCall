@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall.data;
+package jp.ne.nissing.rakutencall.contacts.data;
 
 public class ContactsData {
     private String mTelNumber;

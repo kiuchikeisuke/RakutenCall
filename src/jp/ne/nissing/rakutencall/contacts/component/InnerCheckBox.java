@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall.component;
+package jp.ne.nissing.rakutencall.contacts.component;
 
 import android.content.Context;
 import android.util.AttributeSet;

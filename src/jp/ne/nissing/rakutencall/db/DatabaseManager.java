@@ -1,4 +1,4 @@
-package jp.ne.nissing.rakutencall.util;
+package jp.ne.nissing.rakutencall.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import jp.ne.nissing.rakutencall.data.ContactsData;
+import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
 
 public class DatabaseManager {
     private static DatabaseManager mInstance = null;

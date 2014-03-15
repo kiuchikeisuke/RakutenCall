@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="jp.ne.nissing.rakutencall.activity.MainActivity"
+            android:name="jp.ne.nissing.rakutencall.contacts.IgnoreContactsSelectionActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,11 +34,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="jp.ne.nissing.rakutencall.activity.PreferenceActivity"
+            android:name="jp.ne.nissing.rakutencall.preference.PreferenceActivity"
             android:label="@string/menu_setting" >
         </activity>
         <activity
-            android:name="jp.ne.nissing.rakutencall.activity.CallActivity"
+            android:name="jp.ne.nissing.rakutencall.call.CallActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.CALL" />

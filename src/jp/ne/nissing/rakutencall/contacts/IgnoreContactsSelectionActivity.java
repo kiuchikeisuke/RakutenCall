@@ -1,11 +1,11 @@
-package jp.ne.nissing.rakutencall.activity;
+package jp.ne.nissing.rakutencall.contacts;
 
 import java.util.List;
 
 import jp.ne.nissing.rakutencall.R;
-import jp.ne.nissing.rakutencall.adapter.ContactsAdapter;
-import jp.ne.nissing.rakutencall.data.ContactsData;
-import jp.ne.nissing.rakutencall.util.*;
+import jp.ne.nissing.rakutencall.contacts.data.*;
+import jp.ne.nissing.rakutencall.db.*;
+import jp.ne.nissing.rakutencall.preference.PreferenceActivity;
 import android.app.Activity;
 import android.content.*;
 import android.database.Cursor;
@@ -14,7 +14,7 @@ import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class MainActivity extends Activity {
+public class IgnoreContactsSelectionActivity extends Activity {
 
     private ContactsAdapter mContactsAdapter = null;
     private Context mContext;
@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.ignore_contacts_selection_activity);
         mContext = this;
     }
 

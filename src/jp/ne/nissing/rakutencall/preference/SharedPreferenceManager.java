@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import jp.ne.nissing.rakutencall.data.PhoneActivityData;
+import jp.ne.nissing.rakutencall.preference.phoneappdata.PhoneActivityData;
 
 public class SharedPreferenceManager {
     private static SharedPreferenceManager instance = null;

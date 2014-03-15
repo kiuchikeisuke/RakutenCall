@@ -1,10 +1,9 @@
-package jp.ne.nissing.rakutencall.adapter;
+package jp.ne.nissing.rakutencall.contacts.data;
 
 import java.util.List;
 
 import jp.ne.nissing.rakutencall.R;
-import jp.ne.nissing.rakutencall.data.ContactsData;
-import jp.ne.nissing.rakutencall.layout.ContactLayout;
+import jp.ne.nissing.rakutencall.contacts.layout.ContactLayout;
 import android.content.Context;
 import android.view.*;
 import android.widget.*;
