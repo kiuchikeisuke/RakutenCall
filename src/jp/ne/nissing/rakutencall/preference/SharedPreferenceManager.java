@@ -1,10 +1,8 @@
 package jp.ne.nissing.rakutencall.preference;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.text.TextUtils;
-
 import jp.ne.nissing.rakutencall.preference.phoneappdata.PhoneActivityData;
+import android.content.*;
+import android.text.TextUtils;
 
 public class SharedPreferenceManager {
     private static SharedPreferenceManager instance = null;
@@ -17,6 +15,7 @@ public class SharedPreferenceManager {
     static final String KEY_FREE_DIAL = "free_dial";
     static final String KEY_ADBUDDIZ = "show_adbuddiz";
     static final String KEY_PREFIX_ENABLE = "prefix_enable";
+    static final String KEY_SPECIAL_NUM_IGNORE = "special_num";
     
     static final String DEFAULT_VALUE_PACKAGE = "com.android.phone";
     static final String DEFALUT_VALUE_ACTIVITY = "com.android.phone.OutgoingCallBroadcaster";
@@ -24,6 +23,7 @@ public class SharedPreferenceManager {
     static final boolean DEFAULT_VALUE_FREE_DIAL = false;
     static final boolean DEFAULT_VALUE_ADBUDDIZ = false;
     static final boolean DEFAULT_VALUE_PREFIX_ENABLE = true;
+    static final boolean DEFAULT_VALUE_SPECIAL_NUM_IGNORE = true;
 
     public static SharedPreferenceManager getInstance(Context context){
         if(instance == null){
@@ -83,5 +83,14 @@ public class SharedPreferenceManager {
     public void setPrefixEnable(boolean value){
         editor.putBoolean(KEY_PREFIX_ENABLE, value);
         editor.commit();
+    }
+    
+    public void setSpecialNumIgnore(boolean value){
+        editor.putBoolean(KEY_SPECIAL_NUM_IGNORE, value);
+        editor.commit();
+    }
+    
+    public boolean getSpecialNumIgnore(){
+        return pref.getBoolean(KEY_SPECIAL_NUM_IGNORE, DEFAULT_VALUE_SPECIAL_NUM_IGNORE);
     }
 }

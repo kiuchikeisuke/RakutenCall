@@ -6,23 +6,24 @@ import android.preference.*;
 import android.util.AttributeSet;
 import android.widget.Toast;
 
-public class PrefixEnableCheckBoxPreference extends CheckBoxPreference {
+public class SpecialNumIgnoreCheckBoxPreference extends CheckBoxPreference {
 
     private Context mContext = null;
     
-    public PrefixEnableCheckBoxPreference(Context context, AttributeSet attrs) {
+    public SpecialNumIgnoreCheckBoxPreference(Context context,
+            AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
-        this.setKey(SharedPreferenceManager.KEY_PREFIX_ENABLE);
+        mContext = context; 
+        this.setKey(SharedPreferenceManager.KEY_SPECIAL_NUM_IGNORE);
         
         init();
     }
-    
-    private void init(){
-        this.setSummaryOn(R.string.checkbox_prefix_enable_summary_on);
-        this.setSummaryOff(R.string.checkbox_prefix_enable_summary_off);
+
+    private void init() {
+        this.setSummaryOn(R.string.checkbox_special_num_ignore_on);
+        this.setSummaryOff(R.string.checkbox_special_num_ignore_off);
         
-        this.setChecked(SharedPreferenceManager.getInstance(mContext).getPrefixEnable());
+        this.setChecked(SharedPreferenceManager.getInstance(mContext).getSpecialNumIgnore());
         
         this.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             
@@ -32,18 +33,16 @@ public class PrefixEnableCheckBoxPreference extends CheckBoxPreference {
                     return false;
                 }
                 Boolean isChecked = (Boolean) newValue;
-                
-                SharedPreferenceManager.getInstance(mContext).setPrefixEnable(isChecked);
+                SharedPreferenceManager.getInstance(mContext).setSpecialNumIgnore(isChecked);
                 if(isChecked){
-                    Toast.makeText(mContext, R.string.toast_prefix_enable_on, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, R.string.toast_special_num_ignore_on, Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(mContext, R.string.toast_prefix_enable_off, Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, R.string.toast_special_num_ignore_off, Toast.LENGTH_LONG).show();
                 }
                 
                 return true;
             }
         });
     }
-
 }

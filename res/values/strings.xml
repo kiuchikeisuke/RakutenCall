@@ -26,4 +26,9 @@
     <string name="checkbox_prefix_enable_summary_off">無効</string>
     <string name="toast_prefix_enable_on">プレフィックス機能を有効にしました</string>
     <string name="toast_prefix_enable_off">プレフィックス機能を無効にしました</string>
+    <string name="prefix_special_num_ignore_title">特殊番号</string>
+    <string name="checkbox_special_num_ignore_on">5桁以下の番号は自動で無視する</string>
+    <string name="checkbox_special_num_ignore_off">5桁以下の番号でも自動で無視しない</string>
+    <string name="toast_special_num_ignore_on">5桁以下の番号は自動でプレフィックスをつけない設定になりました</string>
+    <string name="toast_special_num_ignore_off">5桁以下の番号でも自動でプレフィックスをつける設定になりました</string>
 </resources>
