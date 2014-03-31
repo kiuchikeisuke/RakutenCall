@@ -20,7 +20,7 @@ public class SharedPreferenceManager {
     static final String DEFAULT_VALUE_PACKAGE = "com.android.phone";
     static final String DEFALUT_VALUE_ACTIVITY = "com.android.phone.OutgoingCallBroadcaster";
     static final String DEFAULT_VALUE_PREFIX_NUM = "003768";
-    static final boolean DEFAULT_VALUE_FREE_DIAL = false;
+    static final boolean DEFAULT_VALUE_FREE_DIAL_IGNORE = true;
     static final boolean DEFAULT_VALUE_ADBUDDIZ = false;
     static final boolean DEFAULT_VALUE_PREFIX_ENABLE = true;
     static final boolean DEFAULT_VALUE_SPECIAL_NUM_IGNORE = true;
@@ -58,13 +58,13 @@ public class SharedPreferenceManager {
         return pref.getString(KEY_PREFIX_NUM, DEFAULT_VALUE_PREFIX_NUM);
     }
     
-    public void setFreeDialCheck(boolean value){
+    public void setFreeDialIgnoreCheck(boolean value){
         editor.putBoolean(KEY_FREE_DIAL, value);
         editor.commit();
     }
     
-    public boolean getFreeDialCheck(){
-        return pref.getBoolean(KEY_FREE_DIAL, DEFAULT_VALUE_FREE_DIAL);
+    public boolean getFreeDialIgnoreCheck(){
+        return pref.getBoolean(KEY_FREE_DIAL, DEFAULT_VALUE_FREE_DIAL_IGNORE);
     }
 
     public void setIsAdbuddizHide(boolean value){

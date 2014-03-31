@@ -50,7 +50,7 @@ public class CallActivity extends Activity {
                new PrefixEnableSettingCondition(this, telNum),
                new StartWithPrefixNumCondition(this, telNum),
                new IgnoreTelNumCondition(this, telNum),
-               new FreeDialCondition(this, telNum),
+               new FreeDialIgnoreCondition(this, telNum),
                new SpecialNumIgnoreCondition(this,telNum)
                };
        return ConditionManager.isPrefixEnable(conditions);

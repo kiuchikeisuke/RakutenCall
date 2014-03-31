@@ -8,7 +8,7 @@
     <jp.ne.nissing.rakutencall.preference.PrefixNumberDialogEditTextPreference 
         android:title="@string/preference_prefix_num_setting"
         android:dependency="prefix_enable"/>
-    <jp.ne.nissing.rakutencall.preference.FreeDialogCheckBoxPreference
+    <jp.ne.nissing.rakutencall.preference.FreeDialogIgnoreCheckBoxPreference
         android:title="@string/preference_free_dial_title"
         android:dependency="prefix_enable"/>
     <jp.ne.nissing.rakutencall.preference.SpecialNumIgnoreCheckBoxPreference

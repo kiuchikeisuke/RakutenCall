@@ -6,11 +6,11 @@ import android.preference.*;
 import android.util.AttributeSet;
 import android.widget.Toast;
 
-public class FreeDialogCheckBoxPreference extends CheckBoxPreference {
+public class FreeDialogIgnoreCheckBoxPreference extends CheckBoxPreference {
 
     private Context mContext = null;
     
-    public FreeDialogCheckBoxPreference(Context context, AttributeSet attrs) {
+    public FreeDialogIgnoreCheckBoxPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         this.setKey(SharedPreferenceManager.KEY_FREE_DIAL);
@@ -24,7 +24,7 @@ public class FreeDialogCheckBoxPreference extends CheckBoxPreference {
         this.setSummaryOff(R.string.checkbox_free_dial_summary_off);
         
         //デフォルト値の設定
-        this.setChecked(SharedPreferenceManager.getInstance(mContext).getFreeDialCheck());
+        this.setChecked(SharedPreferenceManager.getInstance(mContext).getFreeDialIgnoreCheck());
         
         //リスナーの設定
         this.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -36,7 +36,7 @@ public class FreeDialogCheckBoxPreference extends CheckBoxPreference {
                 }
                 Boolean isChecked = (Boolean) newValue;
                 
-                SharedPreferenceManager.getInstance(mContext).setFreeDialCheck(isChecked);
+                SharedPreferenceManager.getInstance(mContext).setFreeDialIgnoreCheck(isChecked);
                 if(isChecked){
                     Toast.makeText(mContext, R.string.toast_free_dial_on, Toast.LENGTH_LONG).show();
                 }
