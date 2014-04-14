@@ -31,6 +31,7 @@ public class PrefixNumberDialogEditTextPreference extends EditTextPreference {
     protected View onCreateDialogView() {
         EditText editView = this.getEditText();
         if (editView != null) {
+            this.setText(SharedPreferenceManager.getInstance(mContext).getDefaultPrefixNum());
             editView.setHint(R.string.dialog_prefix_num_hint);
             editView.setText(SharedPreferenceManager.getInstance(mContext).getDefaultPrefixNum());
             editView.setInputType(InputType.TYPE_CLASS_PHONE);
@@ -66,5 +67,6 @@ public class PrefixNumberDialogEditTextPreference extends EditTextPreference {
     private void setPrefixNum(String prefixNum){
         this.setSummary(prefixNum);
         this.persistString(prefixNum);
+        this.setText(prefixNum);
     }
 }
