@@ -4,6 +4,7 @@ import java.util.*;
 
 import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
 import jp.ne.nissing.rakutencall.db.DatabaseManager;
+
 import android.content.*;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -60,7 +61,7 @@ public class ContactsManager {
         Cursor dataNameTable = cr.query(Data.CONTENT_URI, null, Data.MIMETYPE + " = ?",
                 new String[] { StructuredName.CONTENT_ITEM_TYPE }, order_str);
 
-        // メールアドレスが存在する連絡先だけを名前格納用リストに格納
+        // 電話番号が存在する連絡先だけを名前格納用リストに格納
         List<ContactsData> listItems = new ArrayList<ContactsData>(); // 名前格納用リスト
         while (dataNameTable.moveToNext()) {
             String id = dataNameTable.getString(dataNameTable.getColumnIndex(Data.CONTACT_ID));
@@ -78,14 +79,22 @@ public class ContactsManager {
 
         DatabaseManager db = DatabaseManager.getInstance(mContext).open();
         Cursor cursor = db.getContacts();
-        while (cursor.moveToNext()) {
-            String telNum = cursor.getString(cursor.getColumnIndex(DatabaseManager.COL_TEL_NUMBER));
-            for (ContactsData contact : listItems) {
-                if (contact.getTelNumber().equals(telNum)) {
-                    contact.setIgnored(true);
-                    break;
-                }
+        
+        List<String> ignoreNumList = new ArrayList<String>();
+        while(cursor.moveToNext()){
+            ignoreNumList.add(cursor.getString(cursor.getColumnIndex(DatabaseManager.COL_TEL_NUMBER)));
+        }
+        
+        for(ContactsData contact : listItems){
+            if(ignoreNumList.contains(contact.getTelNumber())){
+                contact.setIgnored(true);
             }
+        }
+        if(db != null){
+            db.close();
+        }
+        if(cursor != null){
+            cursor.close();
         }
         return listItems;
     }

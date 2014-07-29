@@ -15,10 +15,10 @@ public class IgnoreTelNumCondition extends AbstractCondition {
     public boolean isPrefixEnableCondition() {
         DatabaseManager db = DatabaseManager.getInstance(mContext).open();
         Cursor cursor = db.getContact(new ContactsData(mTelNum, null, null));
-        //DBに登録されている(moveToNext=true)=>Prefixをつけない、なので真偽を反転
-        boolean retval = !cursor.moveToNext(); 
+        //DBに登録されている(moveToFirst=true)=>Prefixをつけない、なので真偽を反転
+        boolean retval = !cursor.moveToFirst();
         db.close();
-        return retval;
+       return retval;
     }
 
 }

@@ -37,7 +37,11 @@ public class IgnoreContactsSelectionActivity extends Activity {
 
     private void initIgnoreList() {
 
-        ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
+        final ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
+        final List<ContactsData> listItems = ContactsManager.getInstance(mContext)
+                .getIgnoreContactList();
+        
+        
         ignoreListView.setItemsCanFocus(false);
         ignoreListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         ignoreListView.setOnItemClickListener(new OnItemClickListener() {
@@ -50,19 +54,30 @@ public class IgnoreContactsSelectionActivity extends Activity {
                 DatabaseManager db = DatabaseManager.getInstance(mContext)
                         .open();
                 Cursor cursor = db.getContact(data);
-                boolean containsDb = cursor.moveToNext();
-                if (containsDb == false) {
+                boolean containsDb = cursor.moveToFirst();
+                if(containsDb == false){
                     db.updateTargetContact(data);
                 } else {
                     db.deleteTargetContact(data);
                 }
-                db.close();
+                if(db != null){
+                    db.close();
+                }
+                if(cursor != null){
+                    cursor.close();
+                }
+                
+                //表示上のチェックマークを更新(同一電話番号が複数ある場合への対応)
+                for(int i = 0;i < listItems.size();i++){
+                    if(data.getTelNumber().equals(listItems.get(i).getTelNumber())){
+                        listItems.get(i).setIgnored(!containsDb);
+                        ignoreListView.setItemChecked(i, !containsDb);
+                    }
+                }
             }
         });
 
         // adapterをセット
-        List<ContactsData> listItems = ContactsManager.getInstance(mContext)
-                .getIgnoreContactList();
         mContactsAdapter = new ContactsAdapter(this, 0, listItems);
         ignoreListView.setAdapter(mContactsAdapter);
 
