@@ -14,6 +14,7 @@ import android.provider.ContactsContract.Data;
 public class ContactsManager {
     private static ContactsManager instance = null;
     private static Context mContext;
+    private List<ContactsData> mContactsList = null;
     
     public ContactsManager(Context context) {
         mContext = context;
@@ -26,7 +27,17 @@ public class ContactsManager {
         return instance; 
     }
     
-    public List<ContactsData> getIgnoreContactList() {
+    /**
+     * @param executeInit
+     * @return ContactsDataのクローンを取得する
+     */
+    public List<ContactsData> getIgnoreContactListClone(boolean executeInit) {
+        if(executeInit == true){
+            mContactsList = null;
+        }
+        if(mContactsList != null){
+            return mContactsList;
+        }
         ContentResolver cr = mContext.getContentResolver();
         Cursor dataAddressTable = cr.query(Phone.CONTENT_URI, null, Data.MIMETYPE + " = ?",
                 new String[] { Phone.CONTENT_ITEM_TYPE }, null);
@@ -62,7 +73,7 @@ public class ContactsManager {
                 new String[] { StructuredName.CONTENT_ITEM_TYPE }, order_str);
 
         // 電話番号が存在する連絡先だけを名前格納用リストに格納
-        List<ContactsData> listItems = new ArrayList<ContactsData>(); // 名前格納用リスト
+        mContactsList = new ArrayList<ContactsData>(); // 名前格納用リスト
         while (dataNameTable.moveToNext()) {
             String id = dataNameTable.getString(dataNameTable.getColumnIndex(Data.CONTACT_ID));
             String displayName = dataNameTable.getString(dataNameTable
@@ -70,7 +81,7 @@ public class ContactsManager {
 
             for (ContactsData item : tempList) {
                 if (item.getContactsId().equals(id)) {
-                    listItems.add(new ContactsData(item.getTelNumber(), displayName, id));
+                    mContactsList.add(new ContactsData(item.getTelNumber(), displayName, id));
                 }
             }
         }
@@ -85,7 +96,7 @@ public class ContactsManager {
             ignoreNumList.add(cursor.getString(cursor.getColumnIndex(DatabaseManager.COL_TEL_NUMBER)));
         }
         
-        for(ContactsData contact : listItems){
+        for(ContactsData contact : mContactsList){
             if(ignoreNumList.contains(contact.getTelNumber())){
                 contact.setIgnored(true);
             }
@@ -96,7 +107,8 @@ public class ContactsManager {
         if(cursor != null){
             cursor.close();
         }
-        return listItems;
+        
+        return mContactsList;
     }
 
 }

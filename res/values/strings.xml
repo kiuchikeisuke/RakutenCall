@@ -31,4 +31,5 @@
     <string name="checkbox_special_num_ignore_off">5桁以下の番号は自動で無視しない</string>
     <string name="toast_special_num_ignore_on">5桁以下の番号は自動でプレフィックスをつけない設定になりました</string>
     <string name="toast_special_num_ignore_off">5桁以下の番号でも自動でプレフィックスをつける設定になりました</string>
+    <string name="search_view_hint">電話番号か宛先名を入力</string>
 </resources>

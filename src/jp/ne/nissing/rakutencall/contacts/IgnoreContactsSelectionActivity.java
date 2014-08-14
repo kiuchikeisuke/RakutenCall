@@ -1,18 +1,30 @@
 package jp.ne.nissing.rakutencall.contacts;
 
-import java.util.List;
-
-import jp.ne.nissing.rakutencall.R;
-import jp.ne.nissing.rakutencall.contacts.data.*;
-import jp.ne.nissing.rakutencall.db.*;
-import jp.ne.nissing.rakutencall.preference.PreferenceActivity;
 import android.app.Activity;
-import android.content.*;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.*;
-import android.widget.*;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Filter;
+import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
+
+import jp.ne.nissing.rakutencall.R;
+import jp.ne.nissing.rakutencall.contacts.data.ContactsAdapter;
+import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
+import jp.ne.nissing.rakutencall.db.DatabaseManager;
+import jp.ne.nissing.rakutencall.preference.PreferenceActivity;
+
+import java.util.List;
 
 public class IgnoreContactsSelectionActivity extends Activity {
 
@@ -32,14 +44,14 @@ public class IgnoreContactsSelectionActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        initIgnoreList();
+        init();
     }
 
-    private void initIgnoreList() {
+    private void init() {
 
         final ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
         final List<ContactsData> listItems = ContactsManager.getInstance(mContext)
-                .getIgnoreContactList();
+                .getIgnoreContactListClone(true);
         
         
         ignoreListView.setItemsCanFocus(false);
@@ -70,7 +82,8 @@ public class IgnoreContactsSelectionActivity extends Activity {
                 //表示上のチェックマークを更新(同一電話番号が複数ある場合への対応)
                 for(int i = 0;i < listItems.size();i++){
                     if(data.getTelNumber().equals(listItems.get(i).getTelNumber())){
-                        listItems.get(i).setIgnored(!containsDb);
+                        ContactsData contactsData = listItems.get(i);
+                        contactsData.setIgnored(!containsDb);
                         ignoreListView.setItemChecked(i, !containsDb);
                     }
                 }
@@ -80,11 +93,42 @@ public class IgnoreContactsSelectionActivity extends Activity {
         // adapterをセット
         mContactsAdapter = new ContactsAdapter(this, 0, listItems);
         ignoreListView.setAdapter(mContactsAdapter);
-
+        ignoreListView.setTextFilterEnabled(true);
+        
         // チェックの状態を反映
         for (int i = 0; i < ignoreListView.getCount(); i++) {
             ignoreListView.setItemChecked(i, listItems.get(i).isIgnored());
         }
+        
+        
+        //ここからSearchViewの設定
+        final SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setSubmitButtonEnabled(false);
+        searchView.setQueryHint(getString(R.string.search_view_hint));
+        searchView.setOnTouchListener(new OnTouchListener() {
+            
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                searchView.setIconified(false);
+                return false;
+            }
+        });
+        searchView.setOnQueryTextListener(new OnQueryTextListener() {
+            
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ContactsAdapter adapter =  (ContactsAdapter) ignoreListView.getAdapter();
+                Filter filter = adapter.getFilter();
+                filter.filter(newText);
+                return true;
+            }
+        });
+        
     }
 
     @Override

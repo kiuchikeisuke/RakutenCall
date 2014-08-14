@@ -16,10 +16,15 @@
             android:maxLines="2"
             android:layout_gravity="top"
             android:text="@string/ignore_list_title" />
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </SearchView>
 
         <ListView
             android:id="@+id/ignoreListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
         </ListView>
 </LinearLayout>

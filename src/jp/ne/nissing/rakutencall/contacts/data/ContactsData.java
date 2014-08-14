@@ -11,6 +11,17 @@ public class ContactsData {
         this.mDisplayName = displayName;
         this.mContactsId = contactsId;
     }
+    
+    /**
+     * 引数に指定したContactDataと同様のデータをセットするコンストラクタ.
+     * @param data
+     */
+    public ContactsData(ContactsData data){
+        this.mTelNumber = data.getTelNumber();
+        this.mDisplayName = data.getDisplayName();
+        this.mContactsId = data.getContactsId();
+        this.isIgnored = data.isIgnored();
+    }
 
     public String getTelNumber() {
         return mTelNumber;
@@ -43,5 +54,9 @@ public class ContactsData {
     public void setIgnored(boolean isIgnored) {
         this.isIgnored = isIgnored;
     }
-
+    
+    @Override
+    public String toString() {
+        return getTelNumber()+getDisplayName();
+    }
 }
