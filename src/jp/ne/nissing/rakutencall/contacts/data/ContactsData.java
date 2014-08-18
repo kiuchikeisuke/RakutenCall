@@ -54,9 +54,4 @@ public class ContactsData {
     public void setIgnored(boolean isIgnored) {
         this.isIgnored = isIgnored;
     }
-    
-    @Override
-    public String toString() {
-        return getTelNumber().replaceAll("-", "")+getDisplayName();
-    }
 }

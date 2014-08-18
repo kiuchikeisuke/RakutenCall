@@ -108,11 +108,22 @@ public class ContactsAdapter extends ArrayAdapter<ContactsData> {
             return results;
         }
 
+        /**
+         * @param item 判定対象
+         * @param keywords キーワード
+         * @return キーワードを含んでいるかどうか。複数キーワードがある場合はANDで判定
+         */
         private boolean isMatched(ContactsData item, String[] keywords) {
             boolean retval = true;
+            String telNum = item.getTelNumber().replaceAll("-", "");
+            String displayName = item.getDisplayName();
             for(String keyword : keywords){
-                if(item.toString().contains(keyword) == false)
-                    retval = false;
+                if(TextUtils.isEmpty(telNum) == false && telNum.contains(keyword) || 
+                        TextUtils.isEmpty(displayName) == false && displayName.contains(keyword)){
+                    continue;
+                }
+                retval = false;
+                break;
             }
             return retval;
         }
