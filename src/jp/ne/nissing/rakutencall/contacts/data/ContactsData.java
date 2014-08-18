@@ -57,6 +57,6 @@ public class ContactsData {
     
     @Override
     public String toString() {
-        return getTelNumber()+getDisplayName();
+        return getTelNumber().replaceAll("-", "")+getDisplayName();
     }
 }
