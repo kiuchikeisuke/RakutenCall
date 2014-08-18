@@ -3,9 +3,7 @@ package jp.ne.nissing.rakutencall.contacts;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,7 +19,6 @@ import android.widget.SearchView.OnQueryTextListener;
 import jp.ne.nissing.rakutencall.R;
 import jp.ne.nissing.rakutencall.contacts.data.ContactsAdapter;
 import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
-import jp.ne.nissing.rakutencall.db.DatabaseManager;
 import jp.ne.nissing.rakutencall.preference.PreferenceActivity;
 
 import java.util.List;
@@ -50,8 +47,8 @@ public class IgnoreContactsSelectionActivity extends Activity {
     private void init() {
 
         final ListView ignoreListView = (ListView) findViewById(R.id.ignoreListView);
-        final List<ContactsData> listItems = ContactsManager.getInstance(mContext)
-                .getIgnoreContactListClone(true);
+        final List<ContactsData> listItems = ContactsRepository.getInstance(mContext)
+                .getIgnoreContactListClone();
         
         
         ignoreListView.setItemsCanFocus(false);
@@ -63,28 +60,14 @@ public class IgnoreContactsSelectionActivity extends Activity {
                     int position, long id) {
                 ContactsData data = mContactsAdapter.getItem(position);
 
-                DatabaseManager db = DatabaseManager.getInstance(mContext)
-                        .open();
-                Cursor cursor = db.getContact(data);
-                boolean containsDb = cursor.moveToFirst();
-                if(containsDb == false){
-                    db.updateTargetContact(data);
-                } else {
-                    db.deleteTargetContact(data);
-                }
-                if(db != null){
-                    db.close();
-                }
-                if(cursor != null){
-                    cursor.close();
-                }
+                boolean isIgnored = ContactsRepository.getInstance(mContext).update(data);
                 
                 //表示上のチェックマークを更新(同一電話番号が複数ある場合への対応)
                 for(int i = 0;i < listItems.size();i++){
                     if(data.getTelNumber().equals(listItems.get(i).getTelNumber())){
                         ContactsData contactsData = listItems.get(i);
-                        contactsData.setIgnored(!containsDb);
-                        ignoreListView.setItemChecked(i, !containsDb);
+                        contactsData.setIgnored(isIgnored);
+                        ignoreListView.setItemChecked(i, contactsData.isIgnored());
                     }
                 }
             }
@@ -94,12 +77,6 @@ public class IgnoreContactsSelectionActivity extends Activity {
         mContactsAdapter = new ContactsAdapter(this, 0, listItems);
         ignoreListView.setAdapter(mContactsAdapter);
         ignoreListView.setTextFilterEnabled(true);
-        
-        // チェックの状態を反映
-        for (int i = 0; i < ignoreListView.getCount(); i++) {
-            ignoreListView.setItemChecked(i, listItems.get(i).isIgnored());
-        }
-        
         
         //ここからSearchViewの設定
         final SearchView searchView = (SearchView) findViewById(R.id.searchView);

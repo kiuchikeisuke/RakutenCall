@@ -1,44 +1,88 @@
 package jp.ne.nissing.rakutencall.contacts;
 
-import java.util.*;
-
-import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
-import jp.ne.nissing.rakutencall.db.DatabaseManager;
-
-import android.content.*;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 
-public class ContactsManager {
-    private static ContactsManager instance = null;
+import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
+import jp.ne.nissing.rakutencall.db.DatabaseManager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class ContactsRepository {
+    private static ContactsRepository instance = null;
     private static Context mContext;
     private List<ContactsData> mContactsList = null;
     
-    public ContactsManager(Context context) {
+    public ContactsRepository(Context context) {
         mContext = context;
     }
 
-    public static ContactsManager getInstance(Context context){
+    public static ContactsRepository getInstance(Context context){
         if(instance == null){
-            instance = new ContactsManager(context);
+            instance = new ContactsRepository(context);
         }
         return instance; 
     }
     
     /**
-     * @param executeInit
+     * @param executeInit DBからデータを取得するかどうか
      * @return ContactsDataのクローンを取得する
      */
-    public List<ContactsData> getIgnoreContactListClone(boolean executeInit) {
-        if(executeInit == true){
-            mContactsList = null;
+    public List<ContactsData> getIgnoreContactListClone() {
+        if(mContactsList == null){
+            mContactsList = createIgnoreContactsList(mContext);
         }
-        if(mContactsList != null){
-            return mContactsList;
+        
+        List<ContactsData> retval = new ArrayList<ContactsData>();
+        for(ContactsData target : mContactsList){
+            retval.add(new ContactsData(target));
         }
-        ContentResolver cr = mContext.getContentResolver();
+        return retval;
+    }
+    
+    /**
+     * @param data
+     * @return 無視リストに追加された場合はtrue,無視リストから削除された場合はfalse
+     */
+    public boolean update(ContactsData data){
+        DatabaseManager db = DatabaseManager.getInstance(mContext).open();
+        Cursor cursor = db.getContact(data);
+        boolean containsDb = cursor.moveToFirst();
+        if(containsDb == false){
+            db.updateTargetContact(data);
+        } else {
+            db.deleteTargetContact(data);
+        }
+        
+        if(db != null){
+            db.close();
+        }
+        if(cursor != null){
+            cursor.close();
+        }
+        
+        for(ContactsData target : mContactsList){
+            if(data.getTelNumber().equals(target.getTelNumber())){
+                target.setIgnored(!containsDb);
+            }
+        }
+        
+        return !containsDb;
+    }
+    
+    /**
+     * 電話帳データおよびDBから無視リストを生成する
+     * @param context
+     * @return
+     */
+    private List<ContactsData> createIgnoreContactsList(Context context){
+        ContentResolver cr = context.getContentResolver();
         Cursor dataAddressTable = cr.query(Phone.CONTENT_URI, null, Data.MIMETYPE + " = ?",
                 new String[] { Phone.CONTENT_ITEM_TYPE }, null);
 
@@ -73,7 +117,7 @@ public class ContactsManager {
                 new String[] { StructuredName.CONTENT_ITEM_TYPE }, order_str);
 
         // 電話番号が存在する連絡先だけを名前格納用リストに格納
-        mContactsList = new ArrayList<ContactsData>(); // 名前格納用リスト
+        List<ContactsData> retval = new ArrayList<ContactsData>(); // 名前格納用リスト
         while (dataNameTable.moveToNext()) {
             String id = dataNameTable.getString(dataNameTable.getColumnIndex(Data.CONTACT_ID));
             String displayName = dataNameTable.getString(dataNameTable
@@ -81,14 +125,14 @@ public class ContactsManager {
 
             for (ContactsData item : tempList) {
                 if (item.getContactsId().equals(id)) {
-                    mContactsList.add(new ContactsData(item.getTelNumber(), displayName, id));
+                    retval.add(new ContactsData(item.getTelNumber(), displayName, id));
                 }
             }
         }
         // カーソルを閉じる
         dataNameTable.close();
 
-        DatabaseManager db = DatabaseManager.getInstance(mContext).open();
+        DatabaseManager db = DatabaseManager.getInstance(context).open();
         Cursor cursor = db.getContacts();
         
         List<String> ignoreNumList = new ArrayList<String>();
@@ -96,7 +140,7 @@ public class ContactsManager {
             ignoreNumList.add(cursor.getString(cursor.getColumnIndex(DatabaseManager.COL_TEL_NUMBER)));
         }
         
-        for(ContactsData contact : mContactsList){
+        for(ContactsData contact : retval){
             if(ignoreNumList.contains(contact.getTelNumber())){
                 contact.setIgnored(true);
             }
@@ -108,7 +152,7 @@ public class ContactsManager {
             cursor.close();
         }
         
-        return mContactsList;
+        return retval;
     }
 
 }
