@@ -27,9 +27,14 @@
     <string name="toast_prefix_enable_on">プレフィックス機能を有効にしました</string>
     <string name="toast_prefix_enable_off">プレフィックス機能を無効にしました</string>
     <string name="prefix_special_num_ignore_title">特殊番号</string>
-    <string name="checkbox_special_num_ignore_on">5桁以下の番号は自動で無視する</string>
-    <string name="checkbox_special_num_ignore_off">5桁以下の番号は自動で無視しない</string>
-    <string name="toast_special_num_ignore_on">5桁以下の番号は自動でプレフィックスをつけない設定になりました</string>
-    <string name="toast_special_num_ignore_off">5桁以下の番号でも自動でプレフィックスをつける設定になりました</string>
+    <string name="checkbox_special_num_ignore_on">5桁以下,及び#,*始まりの番号は自動で無視する</string>
+    <string name="checkbox_special_num_ignore_off">5桁以下,及び#,*始まりの番号は自動で無視しない</string>
+    <string name="toast_special_num_ignore_on">5桁以下,及び#,*始まりの番号は自動でプレフィックスをつけない設定になりました</string>
+    <string name="toast_special_num_ignore_off">5桁以下,及び#,*始まりの番号でも自動でプレフィックスをつける設定になりました</string>
+    <string name="international_num_title">国際電話番号</string>
+    <string name="checkbox_international_num_on">楽天でんわ対応の国際電話番号にプレフィックスを付ける</string>
+    <string name="checkbox_international_num_off">国際電話番号にプレフィックスを付けない</string>
+    <string name="toast_international_num_on">楽天でんわ対応の国際電話番号にプレフィックスを付ける設定になりました</string>
+    <string name="toast_international_num_off">国際電話番号にはプレフィックスを付けない設定になりました</string>
     <string name="search_view_hint">電話番号か宛先名を入力</string>
 </resources>
