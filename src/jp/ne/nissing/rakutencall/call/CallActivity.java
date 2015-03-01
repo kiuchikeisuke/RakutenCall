@@ -1,5 +1,8 @@
 package jp.ne.nissing.rakutencall.call;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import jp.ne.nissing.rakutencall.call.condition.*;
 import jp.ne.nissing.rakutencall.preference.SharedPreferenceManager;
 import jp.ne.nissing.rakutencall.preference.phoneappdata.PhoneActivityData;
@@ -30,6 +33,12 @@ public class CallActivity extends Activity {
         }
 
         String telNumber = uri.toString().substring(TEL.length());
+        
+        try {
+            telNumber =  URLDecoder.decode(telNumber,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         if (needPrefixTel(telNumber) == true) {
             callPhone(TEL + SharedPreferenceManager.getInstance(this).getDefaultPrefixNum()
