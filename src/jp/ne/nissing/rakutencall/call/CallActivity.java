@@ -1,7 +1,7 @@
 package jp.ne.nissing.rakutencall.call;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.net.*;
 
 import jp.ne.nissing.rakutencall.call.condition.*;
 import jp.ne.nissing.rakutencall.preference.SharedPreferenceManager;
@@ -34,12 +34,6 @@ public class CallActivity extends Activity {
 
         String telNumber = uri.toString().substring(TEL.length());
         
-        try {
-            telNumber =  URLDecoder.decode(telNumber,"UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
         if (needPrefixTel(telNumber) == true) {
             callPhone(TEL + SharedPreferenceManager.getInstance(this).getDefaultPrefixNum()
                     + telNumber);
@@ -50,10 +44,18 @@ public class CallActivity extends Activity {
 
     /**
      * Prefixの番号をつける必要があるかどうか
-     * @param telNum
+     * 判定に使う電話番号はUTF-8でデコードしたものを優先的に使用する
+     * @param number
      * @return true->Prefix番号付与を行う false-> Prefix番号付与を行わない
      */
-    private boolean needPrefixTel(String telNum) {
+    private boolean needPrefixTel(String number) {
+        String decodedTelNumber = null;
+        try {
+            decodedTelNumber = URLDecoder.decode(number, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String telNum = decodedTelNumber != null ? decodedTelNumber : number;
        AbstractCondition[] conditions = 
            {
                new PrefixEnableSettingCondition(this, telNum),
@@ -68,6 +70,7 @@ public class CallActivity extends Activity {
     
 
     private void callPhone(String tel) {
+        
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(tel));
 
         PhoneActivityData data = SharedPreferenceManager.getInstance(this).getDefaultPhoneApp();
