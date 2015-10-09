@@ -7,10 +7,8 @@ import java.util.List;
 import jp.ne.nissing.rakutencall.call.condition.*;
 import jp.ne.nissing.rakutencall.preference.SharedPreferenceManager;
 import jp.ne.nissing.rakutencall.preference.phoneappdata.PhoneActivityData;
-
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -86,7 +84,15 @@ public class CallActivity extends Activity {
             Toast.makeText(this, "正しくアプリを認識できませんでした。「"+data.getApplicationName()+"」アプリを起動します", Toast.LENGTH_LONG).show();
             intent = getPhoneApp(tel);
         }
-        startActivity(intent);
+        try{
+            startActivity(intent);
+        }catch(ActivityNotFoundException e){
+            SharedPreferenceManager.getInstance(this).resetDefaultPhoneApp();
+            PhoneActivityData data = SharedPreferenceManager.getInstance(this).getDefaultPhoneApp();
+            Toast.makeText(this, "正しくアプリを認識できませんでした。「"+data.getApplicationName()+"」アプリを起動します", Toast.LENGTH_LONG).show();
+            intent = getPhoneApp(tel);
+            startActivity(intent);
+        }
         
         finish();
     }
