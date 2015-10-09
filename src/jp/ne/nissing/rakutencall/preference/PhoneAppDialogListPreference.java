@@ -52,6 +52,16 @@ public class PhoneAppDialogListPreference extends ListPreference {
             }
         }
         
+        //フェールセーフとしてもしリストがチェックされない場合は一番最初の電話アプリを選択状態にする
+        if(defaultPhoneAppIndex == -1 && lists.size() > 0){
+            lists.get(0).setSelected(true);
+            defaultPhoneAppIndex = 0;
+            PhoneActivityData phoneActivityData = lists.get(0);
+            SharedPreferenceManager.getInstance(mContext).setDefaultPhoneApp(
+                    phoneActivityData.getPackageName(), phoneActivityData.getAcitivityName());
+            setSummary(phoneActivityData);
+        }
+        
         PhoneActivityDataAdapter adapter = new PhoneActivityDataAdapter(mContext, 0, lists);
         builder.setSingleChoiceItems(adapter, defaultPhoneAppIndex, new OnClickListener() {
             @Override

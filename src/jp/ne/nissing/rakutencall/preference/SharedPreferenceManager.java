@@ -1,7 +1,9 @@
 package jp.ne.nissing.rakutencall.preference;
 
 import jp.ne.nissing.rakutencall.preference.phoneappdata.PhoneActivityData;
+
 import android.content.*;
+import android.os.Build;
 import android.text.TextUtils;
 
 public class SharedPreferenceManager {
@@ -18,8 +20,13 @@ public class SharedPreferenceManager {
     static final String KEY_SPECIAL_NUM_IGNORE = "special_num";
     static final String KEY_INTERNATIONAL_NUM = "international_num";
     
+    //AndroidLより前のパッケージ名、アプリ名
     static final String DEFAULT_VALUE_PACKAGE = "com.android.phone";
     static final String DEFALUT_VALUE_ACTIVITY = "com.android.phone.OutgoingCallBroadcaster";
+    //AndroidL以降のパッケージ名、アプリ名
+    static final String DEFAULT_VALUE_PACKAGE_L = "com.android.server.telecom";
+    static final String DEFALUT_VALUE_ACTIVITY_L = "com.android.server.telecom.CallActivity";
+    
     static final String DEFAULT_VALUE_PREFIX_NUM = "003768";
     static final boolean DEFAULT_VALUE_FREE_DIAL_IGNORE = true;
     static final boolean DEFAULT_VALUE_ADBUDDIZ = false;
@@ -46,10 +53,17 @@ public class SharedPreferenceManager {
     }
 
     public PhoneActivityData getDefaultPhoneApp(){
-        String packageName = pref.getString(KEY_PACKAGE, DEFAULT_VALUE_PACKAGE);
-        String activityName = pref.getString(KEY_ACTIVITY, DEFALUT_VALUE_ACTIVITY);
-        return new PhoneActivityData(null, null, packageName, activityName);
-    }
+        String packageName = "";
+        String activityName = "";
+        //Kitkat以降はAcitivity名が変わる
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
+            packageName = pref.getString(KEY_PACKAGE, DEFAULT_VALUE_PACKAGE_L);
+            activityName = pref.getString(KEY_ACTIVITY, DEFALUT_VALUE_ACTIVITY_L);
+        }else{
+            packageName = pref.getString(KEY_PACKAGE, DEFAULT_VALUE_PACKAGE);
+            activityName = pref.getString(KEY_ACTIVITY, DEFALUT_VALUE_ACTIVITY);
+        }
+        return new PhoneActivityData(null, null, packageName, activityName);    }
 
     public void setDefaultPrefixNum(String prefixNum){
         editor.putString(KEY_PREFIX_NUM, TextUtils.isEmpty(prefixNum) ? DEFAULT_VALUE_PREFIX_NUM : prefixNum);
