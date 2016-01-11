@@ -9,13 +9,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Filter;
-import android.widget.ListView;
-import android.widget.SearchView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.SearchView.OnQueryTextListener;
-
 import jp.ne.nissing.rakutencall.R;
 import jp.ne.nissing.rakutencall.contacts.data.ContactsAdapter;
 import jp.ne.nissing.rakutencall.contacts.data.ContactsData;
@@ -70,6 +67,16 @@ public class IgnoreContactsSelectionActivity extends Activity {
                         ignoreListView.setItemChecked(i, contactsData.isIgnored());
                     }
                 }
+            }
+        });
+        
+        //ダイアログを表示して無視時間帯
+        ignoreListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                return false;
             }
         });
 
