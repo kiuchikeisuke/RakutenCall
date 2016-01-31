@@ -36,7 +36,6 @@
     <string name="toast_international_num_off">国際電話番号にはプレフィックスを付けない設定になりました</string>
     <string name="search_view_hint">電話番号か宛先名を入力</string>
     <string name="exception_prefix_title">無視するフリーダイアル番号設定</string>
-    <string name="exception_prefix_summary">プレフィックス機能対象外とするプレフィックスの設定</string>
     <string name="exception_prefix_list_title">削除する場合は番号をタップしてください</string>
     <string name="exception_prefix_add">追加</string>
     <string name="exception_prefix_del">削除</string>
