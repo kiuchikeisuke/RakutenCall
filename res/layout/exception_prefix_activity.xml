@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/exceptionPrefixTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/exception_prefix_list_title"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="30px"
+         />
+
+    <ListView
+        android:id="@+id/exceptionPrefixList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/exceptionPrefixTitle"
+        android:layout_above="@+id/addExceptionPrefixButton" >
+    </ListView>
+
+    <Button
+        android:id="@+id/addExceptionPrefixButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/exception_prefix_add" />
+
+</RelativeLayout>

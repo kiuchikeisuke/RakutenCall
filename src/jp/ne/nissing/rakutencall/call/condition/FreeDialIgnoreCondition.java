@@ -1,17 +1,17 @@
 package jp.ne.nissing.rakutencall.call.condition;
 
+import jp.ne.nissing.rakutencall.db.DatabaseManager;
 import jp.ne.nissing.rakutencall.preference.SharedPreferenceManager;
 import android.content.Context;
+import android.database.Cursor;
 
 public class FreeDialIgnoreCondition extends AbstractCondition {
-
-    private final String FREE_DIAL_0120 = "0120";
-    private final String FREE_DIAL_0077 = "0077";
-    private final String FREE_DIAL_0088 = "0088";
-    private final String FREE_DIAL_0570 = "0570";
+    
+    private Context mContext;
     
     public FreeDialIgnoreCondition(Context context, String telNum) {
         super(context, telNum);
+        mContext = context;
     }
 
     @Override
@@ -21,7 +21,19 @@ public class FreeDialIgnoreCondition extends AbstractCondition {
     }
 
     private boolean isFreeDial() {
-        return mTelNum.startsWith(FREE_DIAL_0120) || mTelNum.startsWith(FREE_DIAL_0077) || mTelNum.startsWith(FREE_DIAL_0088) || mTelNum.startsWith(FREE_DIAL_0570);
+        boolean isFreeDial = false;
+
+        DatabaseManager db = DatabaseManager.getInstance(mContext).open();
+        Cursor prefixs = db.getExceptionPrefixs();
+        while(prefixs.moveToNext()){
+            if( mTelNum.startsWith(prefixs.getString(prefixs.getColumnIndex(DatabaseManager.COL_TEL_NUMBER))) ){
+                isFreeDial = true;
+                break;
+            }
+        }
+        
+        db.close();
+        return isFreeDial;
     }
 
 }

@@ -49,6 +49,12 @@
                 <data android:scheme="tel" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="jp.ne.nissing.rakutencall.preference.exception_prefix.ExceptionPrefixActivity">
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
 
         <!-- 広告関連 -->
         <meta-data
