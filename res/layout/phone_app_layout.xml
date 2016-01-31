@@ -36,6 +36,7 @@
         android:minLines="1"
         android:paddingLeft="5dp"
         android:text="appName"
+        android:textColor="#000000"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	<RadioButton

@@ -65,17 +65,6 @@ public class SharedPreferenceManager {
         }
         return new PhoneActivityData(null, null, packageName, activityName);
     }
-    
-    public void resetDefaultPhoneApp(){
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
-            editor.putString(KEY_PACKAGE, DEFAULT_VALUE_PACKAGE_L);
-            editor.putString(KEY_ACTIVITY, DEFALUT_VALUE_ACTIVITY_L);
-        }else{
-            editor.putString(KEY_PACKAGE, DEFAULT_VALUE_PACKAGE);
-            editor.putString(KEY_ACTIVITY, DEFALUT_VALUE_ACTIVITY);
-        }
-        editor.commit();
-    }
 
     public void setDefaultPrefixNum(String prefixNum){
         editor.putString(KEY_PREFIX_NUM, TextUtils.isEmpty(prefixNum) ? DEFAULT_VALUE_PREFIX_NUM : prefixNum);

@@ -4,10 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.*;
 import java.util.List;
 
+import jp.ne.nissing.rakutencall.R;
 import jp.ne.nissing.rakutencall.call.condition.*;
 import jp.ne.nissing.rakutencall.preference.SharedPreferenceManager;
-import jp.ne.nissing.rakutencall.preference.phoneappdata.PhoneActivityData;
-import android.app.Activity;
+import jp.ne.nissing.rakutencall.preference.phoneappdata.*;
+import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -19,11 +20,14 @@ import android.widget.Toast;
 public class CallActivity extends Activity {
 
     private final String TEL = "tel:";
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        mContext = this;
+        
         Intent intent = getIntent();
         if (intent == null) {
             finish();
@@ -73,29 +77,75 @@ public class CallActivity extends Activity {
     }
     
 
-    private void callPhone(String tel) {
-        
+    private void callPhone(final String tel) {
+
         Intent intent = getPhoneApp(tel);
-        
+
         boolean checkImplicitIntent = checkImplicitIntent(this, intent);
         if(checkImplicitIntent == false){
-            SharedPreferenceManager.getInstance(this).resetDefaultPhoneApp();
-            PhoneActivityData data = SharedPreferenceManager.getInstance(this).getDefaultPhoneApp();
-            Toast.makeText(this, "正しくアプリを認識できませんでした。「"+data.getApplicationName()+"」アプリを起動します", Toast.LENGTH_LONG).show();
-            intent = getPhoneApp(tel);
+
+            Toast.makeText(mContext, R.string.call_not_found_app_notice_toast, Toast.LENGTH_LONG).show();
+
+            //起動するActivityを設定するダイアログを表示
+            AlertDialog.Builder defaultAppSetDialogBuilder = new AlertDialog.Builder(mContext);
+            defaultAppSetDialogBuilder.setTitle(R.string.preference_action_settings);
+            int defaultPhoneAppIndex = 0;
+
+            final List<PhoneActivityData> lists = PhoneAppUtil.getActivitis(mContext);
+
+            for(int i = 0 ; i < lists.size(); i++){
+                if(lists.get(i).isSelected()){
+                    defaultPhoneAppIndex = i;
+                    break;
+                }
+            }
+
+            PhoneActivityDataAdapter adapter = new PhoneActivityDataAdapter(mContext,defaultPhoneAppIndex,lists);
+
+            defaultAppSetDialogBuilder.setSingleChoiceItems(adapter, defaultPhoneAppIndex, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    PhoneActivityData phoneActivityData = lists.get(which);
+                    SharedPreferenceManager.getInstance(mContext).setDefaultPhoneApp(
+                            phoneActivityData.getPackageName(), phoneActivityData.getAcitivityName());
+                    callPhone(tel);
+                }
+            });
+
+            defaultAppSetDialogBuilder.setPositiveButton(null, null);
+
+            defaultAppSetDialogBuilder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Toast.makeText(mContext,R.string.call_not_found_app_cancel_toast , Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            });
+
+            defaultAppSetDialogBuilder.setCancelable(false);
+
+            AlertDialog defaultAppSetDialog = defaultAppSetDialogBuilder.create();
+            defaultAppSetDialog.show();
+
+        } else {
+            try{
+                startActivity(intent);
+            }catch(ActivityNotFoundException e){
+                Toast.makeText(this,R.string.call_not_found_app_error_toast , Toast.LENGTH_LONG).show();
+            }
+
+            finish();
         }
-        try{
-            startActivity(intent);
-        }catch(ActivityNotFoundException e){
-            SharedPreferenceManager.getInstance(this).resetDefaultPhoneApp();
-            PhoneActivityData data = SharedPreferenceManager.getInstance(this).getDefaultPhoneApp();
-            Toast.makeText(this, "正しくアプリを認識できませんでした。「"+data.getApplicationName()+"」アプリを起動します", Toast.LENGTH_LONG).show();
-            intent = getPhoneApp(tel);
-            startActivity(intent);
-        }
-        
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
         finish();
     }
+    
 
     private Intent getPhoneApp(String tel) {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(tel));
