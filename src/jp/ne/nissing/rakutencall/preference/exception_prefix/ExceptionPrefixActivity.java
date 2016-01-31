@@ -57,7 +57,7 @@ public class ExceptionPrefixActivity extends Activity{
                 
                 AlertDialog.Builder deleteCheckDialogBuilder = new AlertDialog.Builder(mContext);
                 deleteCheckDialogBuilder.setTitle(R.string.exception_prefix_dialog_title);
-                deleteCheckDialogBuilder.setMessage(prefixNumber + "を削除しますか?");
+                deleteCheckDialogBuilder.setMessage(mContext.getString(R.string.exception_prefix_dialog_message, prefixNumber));
                 deleteCheckDialogBuilder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     
                     @Override
