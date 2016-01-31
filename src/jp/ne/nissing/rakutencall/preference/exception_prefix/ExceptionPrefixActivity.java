@@ -66,6 +66,8 @@ public class ExceptionPrefixActivity extends Activity{
                         DatabaseManager.getInstance(mContext).open();
                         DatabaseManager.getInstance(mContext).deleteTargetExceptionPrefix(prefixNumber);
                         DatabaseManager.getInstance(mContext).close();
+                        Toast.makeText(mContext, mContext.getString(R.string.exception_prefix_del_toast, prefixNumber), Toast.LENGTH_LONG).show();
+
                     }
                 });
                 
@@ -101,7 +103,7 @@ public class ExceptionPrefixActivity extends Activity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String prefixNumber = inputText.getText().toString();
-                        Toast.makeText(mContext, prefixNumber + "を対象外プレフィックスに追加しました", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, mContext.getString(R.string.exception_prefix_add_toast, prefixNumber), Toast.LENGTH_LONG).show();
                         mExceptionPrefixAdapter.add(prefixNumber);
                         DatabaseManager.getInstance(mContext).open();
                         DatabaseManager.getInstance(mContext).updateTargetExceptionPrefix(prefixNumber);

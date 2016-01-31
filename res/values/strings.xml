@@ -38,7 +38,9 @@
     <string name="exception_prefix_title">無視するフリーダイアル番号設定</string>
     <string name="exception_prefix_list_title">削除する場合は番号をタップしてください</string>
     <string name="exception_prefix_add">追加</string>
+    <string name="exception_prefix_add_toast">「%s」を無視するフリーダイアル番号に追加しました</string>
     <string name="exception_prefix_del">削除</string>
+    <string name="exception_prefix_del_toast">「%s」を無視するフリーダイアル番号から削除しました</string>
     <string name="exception_prefix_dialog_title">確認</string>
     <string name="exception_prefix_add_dialog_title">番号入力</string>
     <string name="exception_prefix_dialog_message">「%s」を削除しますか?</string>
