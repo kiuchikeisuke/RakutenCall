@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        applicationId "jp.ne.nissing.rakutencall"
+        minSdkVersion 14
+        targetSdkVersion 18
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            debuggable false
+            zipAlignEnabled true
+            shrinkResources true
+
+            proguardFiles {
+                getDefaultProguardFile('proguard-android.txt')
+                "proguard-rules.pro"
+            }
+            def files = rootProject.file("proguard")
+                    .listFiles()
+                    .findAll { it.name.startsWith("proguard") }
+                    .toList()
+                    .toArray()
+            proguardFiles(files)
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
+//            applicationIdSuffix '.debug'
+            versionNameSuffix "-debug"
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        main.kotlin.srcDirs += 'src/main/kotlin'
+        test.kotlin.srcDirs += 'src/test/kotlin'
+        androidTest.kotlin.srcDirs += 'src/androidTest/kotlin'
+    }
+    compileOptions
+            {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+    dataBinding {
+        enabled true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.google.dagger:dagger:2.+'
+    implementation 'com.google.dagger:dagger-android:2.+'
+    implementation 'com.google.dagger:dagger-android-support:2.+'
+    implementation 'io.reactivex.rxjava2:rxjava:+'
+    implementation 'io.reactivex.rxjava2:rxkotlin:+'
+    implementation 'io.reactivex.rxjava2:rxandroid:+'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'androidx.core:core-ktx:0.3'
+    implementation 'com.jakewharton.timber:timber:+'
+    implementation 'com.squareup.leakcanary:leakcanary-android:+'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    kapt 'com.google.dagger:dagger-compiler:2.+'
+    kapt 'com.google.dagger:dagger-android-processor:2.+'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+}
+
+
