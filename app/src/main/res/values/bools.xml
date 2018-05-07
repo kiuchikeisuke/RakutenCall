@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="default_free_dial">true</bool>
+    <bool name="default_show_adbuddiz">true</bool>
+    <bool name="default_prefix_enable">true</bool>
+    <bool name="default_special_num">true</bool>
+    <bool name="default_international_num">true</bool>
+</resources>

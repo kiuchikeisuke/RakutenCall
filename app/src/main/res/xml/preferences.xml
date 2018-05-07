@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 起動する電話アプリ選択 -->
+    <ListPreference
+        android:id="@string/key_phone_app_list"
+        android:title="@string/title_phone_app_list"
+        android:dialogTitle="@string/title_dialog_phone_app_list"/>
+    <!-- プレフィックス機能有効・無効 -->
+    <SwitchPreference
+        android:id="@string/key_prefix_enable"
+        android:title="@string/title_prefix_enable"
+        android:defaultValue="@bool/default_prefix_enable"
+        android:summaryOn="@string/summary_on_prefix_enable"
+        android:summaryOff="@string/summary_off_prefix_enable"/>
+    <!-- プレフィックス番号入力ダイアログ -->
+    <EditTextPreference
+        android:id="@string/key_prefix_num"
+        android:inputType="phone"
+        android:title="@string/title_prefix_num"
+        android:defaultValue="@string/default_prefix_num"
+        android:summary="%s"
+        android:dialogTitle="@string/title_prefix_num_dialog"
+        android:hint="@string/hint_prefix_num_dialog"/>
+    <!-- フリーダイアル設定 -->
+    <SwitchPreference
+        android:id="@string/key_free_dial"
+        android:title="@string/title_free_dial"
+        android:defaultValue="@bool/default_free_dial"
+        android:summaryOn="@string/summary_on_free_dial"
+        android:summaryOff="@string/summary_off_free_dial"/>
+    <!-- 特殊文字設定 -->
+    <SwitchPreference
+        android:id="@string/key_special_num"
+        android:title="@string/title_special_num"
+        android:defaultValue="@bool/default_special_num"
+        android:dependency="@string/key_prefix_enable"
+        android:summaryOn="@string/summary_on_special_num"
+        android:summaryOff="@string/summary_off_special_num"/>
+    <!-- 国際番号設定 -->
+    <SwitchPreference
+        android:id="@string/key_international_num"
+        android:title="@string/title_international_num"
+        android:defaultValue="@bool/default_international_num"
+        android:dependency="@string/key_prefix_enable"
+        android:summaryOn="@string/summary_on_international_num"
+        android:summaryOff="@string/summary_off_international_num"/>
+    <!-- 広告設定 -->
+    <SwitchPreference
+        android:id="@string/key_show_adbuddiz"
+        android:title="@string/title_show_adbuddiz"
+        android:defaultValue="@bool/default_show_adbuddiz"
+        android:summaryOn="@string/summary_on_show_adbuddiz"
+        android:summaryOff="@string/summary_off_show_adbuddiz"/>
+</PreferenceScreen>
