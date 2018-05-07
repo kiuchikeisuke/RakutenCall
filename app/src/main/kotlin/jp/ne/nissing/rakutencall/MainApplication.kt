@@ -1,10 +1,10 @@
 package jp.ne.nissing.rakutencall
 
-import com.example.example.utils.di.DaggerRootComponent
-import com.example.example.utils.di.applyAutoInjector
-import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
+import jp.ne.nissing.rakutencall.utils.commons.UseCase
+import jp.ne.nissing.rakutencall.utils.di.DaggerRootComponent
+import jp.ne.nissing.rakutencall.utils.di.applyAutoInjector
 import timber.log.Timber
 
 class MainApplication : DaggerApplication() {
@@ -17,7 +17,6 @@ class MainApplication : DaggerApplication() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-        AndroidThreeTen.init(this);
         applyAutoInjector()
     }
 }
