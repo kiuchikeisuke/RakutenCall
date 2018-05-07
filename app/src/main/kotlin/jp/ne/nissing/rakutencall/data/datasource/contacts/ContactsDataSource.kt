@@ -13,8 +13,6 @@ interface ContactsDataSource {
     fun deleteIgnoreContact(contact: Contact): Observable<Unit>
     fun getIgnoreContacts(): Observable<List<Contact>>
 
-    fun getIgnoreNumbers(): Observable<List<PhoneNumber>>
-
     fun getEnableInternationalPrefix(): Observable<List<InternationalPrefix>>
     fun getDisableInternationalPrefix(): Observable<List<InternationalPrefix>>
     fun getInternationalIdentificationPrefix(): Observable<List<IdentificationPrefix>>

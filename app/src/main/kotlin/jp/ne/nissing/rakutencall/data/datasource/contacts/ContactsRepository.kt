@@ -7,7 +7,6 @@ import io.reactivex.ObservableEmitter
 import io.realm.Realm
 import jp.ne.nissing.rakutencall.R
 import jp.ne.nissing.rakutencall.data.entity.contact.Contact
-import jp.ne.nissing.rakutencall.data.entity.number.PhoneNumber
 import jp.ne.nissing.rakutencall.data.entity.prefix.FreeDialPrefix
 import jp.ne.nissing.rakutencall.data.entity.prefix.IdentificationPrefix
 import jp.ne.nissing.rakutencall.data.entity.prefix.InternationalPrefix
@@ -38,13 +37,6 @@ class ContactsRepository @Inject constructor(private val realm: Realm, private v
     override fun getIgnoreContacts(): Observable<List<Contact>> {
         return Observable.create { e: ObservableEmitter<List<Contact>> ->
             e.onNext(realm.where(Contact::class.java).findAll().toList())
-            e.onComplete()
-        }.subscribeOnMainThread()
-    }
-
-    override fun getIgnoreNumbers(): Observable<List<PhoneNumber>> {
-        return Observable.create { e: ObservableEmitter<List<PhoneNumber>> ->
-            e.onNext(realm.where(Contact::class.java).findAll().map { it.phoneNumber }.toList())
             e.onComplete()
         }.subscribeOnMainThread()
     }
@@ -125,7 +117,7 @@ class ContactsRepository @Inject constructor(private val realm: Realm, private v
                 if (id != null) {
                     tempHash[id]?.let {
                         val contact = Contact()
-                        contact.phoneNumber = PhoneNumber(it)
+                        contact.phoneNumberString = it
                         contact.displayName = displayName
                         contact.contactId = id
                         contacts.add(contact)

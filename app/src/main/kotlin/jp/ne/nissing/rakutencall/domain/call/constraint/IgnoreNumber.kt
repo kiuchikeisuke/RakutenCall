@@ -15,8 +15,8 @@ class IgnoreNumber @Inject constructor(
     : IoUseCase<IgnoreNumber.Request, IgnoreNumber.Response, Throwable>(executionThreads) {
 
     override fun execute(requestValue: Request): Observable<Response> {
-        return contactsDataSource.getIgnoreNumbers().map {
-            if (it.any { it == requestValue.phoneNumber })
+        return contactsDataSource.getIgnoreContacts().map {
+            if (it.any { it.getPhoneNumber() == requestValue.phoneNumber })
                 Response(Prefix.generateEmptyPrefix())
             else
                 Response(requestValue.prefix)

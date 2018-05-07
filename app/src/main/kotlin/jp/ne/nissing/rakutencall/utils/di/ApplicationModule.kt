@@ -13,7 +13,6 @@ import jp.ne.nissing.rakutencall.BuildConfig
 import jp.ne.nissing.rakutencall.MainApplication
 import jp.ne.nissing.rakutencall.R
 import jp.ne.nissing.rakutencall.data.entity.contact.Contact
-import jp.ne.nissing.rakutencall.data.entity.number.PhoneNumber
 import jp.ne.nissing.rakutencall.db.DatabaseManager
 import jp.ne.nissing.rakutencall.utils.commons.ExecutionThreads
 
@@ -39,7 +38,7 @@ class ApplicationModule {
                 val contact = realm.createObject(Contact::class.java)
                 contact.contactId = contactId
                 contact.displayName = displayName
-                contact.phoneNumber = PhoneNumber(telNumber)
+                contact.phoneNumberString = telNumber
                 realm.insert(contact)
             }
             realm.commitTransaction()
