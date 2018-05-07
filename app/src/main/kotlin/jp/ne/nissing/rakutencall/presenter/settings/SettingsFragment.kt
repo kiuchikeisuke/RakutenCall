@@ -21,7 +21,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, SettingsContrac
         (findPreference(getString(R.string.key_phone_app_list)) as? ListPreference)?.apply {
             entries = response.phoneAppInfos.map { it.label }.toTypedArray()
             entryValues = response.phoneAppInfos.map { it.packageInfo.getUriString() }.toTypedArray()
-            this.setDefaultValue(response.usePackageInfo.getUriString())
+            setDefaultValue(response.usePackageInfo.getUriString())
         }
     }
 
