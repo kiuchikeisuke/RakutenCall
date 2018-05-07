@@ -27,36 +27,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".contacts.IgnoreContactsSelectionActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".preference.PreferenceActivity"
-            android:label="@string/menu_setting">
-        </activity>
-        <activity
-            android:name=".call.CallActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.CALL"/>
-                <action android:name="android.intent.action.CALL_PRIVILEGED"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data android:scheme="tel"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".preference.exception_prefix.ExceptionPrefixActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-            </intent-filter>
-        </activity>
 
         <!-- 広告関連 -->
         <meta-data
@@ -75,6 +45,8 @@
         <activity
             android:name="com.purplebrain.adbuddiz.sdk.AdBuddizActivity"
             android:theme="@android:style/Theme.Translucent"/>
+        <activity android:name=".presenter.call.CallActivity"/>
+        <activity android:name=".presenter.settings.SettingsActivity"/>
     </application>
 
 </manifest>
