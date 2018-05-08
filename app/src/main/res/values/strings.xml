@@ -6,10 +6,11 @@
     <!-- Call -->
     <string name="call_not_found_app_error_toast">正しくアプリを認識できませんでした。らくでんの設定から電話アプリを設定してください</string>
 
-    <!-- Ignore Contact -->
-    <string name="search_view_hint">電話番号か宛先名を入力</string>
-    <string name="ignore_list_title">プレフィックスをつけない宛先をチェックしてください</string>
+    <!-- privacy policy -->
+    <string name="privacy_policy_url">http://minismahn.hatenablog.com/entry/2017/02/04/200505</string>
 
+    <!-- Ignore Contact -->
+    <string name="ignore_list_title">プレフィックスをつけない宛先をチェックしてください</string>
 
     <!-- Menu Items -->
     <string name="menu_setting">設定</string>
@@ -53,6 +54,7 @@
 
 
     <!-- no used -->
+    <string name="search_view_hint">電話番号か宛先名を入力</string>
     <string name="toast_prefix_num_setend">「%s」をプレフィックスの番号として設定しました</string>
     <string name="preference_action_settings">電話アプリ</string>
     <string name="call_not_found_app_notice_toast">電話アプリの設定されていません。起動したい電話アプリを選択してください</string>

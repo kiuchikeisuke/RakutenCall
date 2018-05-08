@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import jp.ne.nissing.rakutencall.presenter.call.CallActivity
 import jp.ne.nissing.rakutencall.presenter.call.CallModule
+import jp.ne.nissing.rakutencall.presenter.contacts.IgnoreContactListActivity
+import jp.ne.nissing.rakutencall.presenter.contacts.IgnoreContactListModule
 import jp.ne.nissing.rakutencall.presenter.settings.SettingsActivity
 import jp.ne.nissing.rakutencall.presenter.settings.SettingsModule
 import jp.ne.nissing.rakutencall.utils.annotations.ActivityScope
@@ -24,4 +26,8 @@ internal abstract class BindingModules {
     @ContributesAndroidInjector(modules = [SettingsModule::class])
     @ActivityScope
     abstract fun contributeSettingsActivityInjector(): SettingsActivity
+
+    @ContributesAndroidInjector(modules = [IgnoreContactListModule::class])
+    @ActivityScope
+    abstract fun contributeIgnoreContactListActivityInjector(): IgnoreContactListActivity
 }

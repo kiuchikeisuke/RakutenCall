@@ -15,21 +15,23 @@ import jp.ne.nissing.rakutencall.utils.extensions.subscribeOnMainThread
 import javax.inject.Inject
 
 class ContactsRepository @Inject constructor(private val realm: Realm, private val context: Context) : ContactsDataSource {
-    override fun setIgnoreContact(contact: Contact): Observable<Unit> {
-        return Observable.create { e: ObservableEmitter<Unit> ->
+    override fun addIgnoreContact(contact: Contact): Observable<Contact> {
+        return Observable.create { e: ObservableEmitter<Contact> ->
             realm.beginTransaction()
             realm.insertOrUpdate(realm.copyToRealm(contact))
-            e.onNext(realm.commitTransaction())
+            realm.commitTransaction()
+            e.onNext(contact)
             e.onComplete()
         }.subscribeOnMainThread()
     }
 
-    override fun deleteIgnoreContact(contact: Contact): Observable<Unit> {
-        return Observable.create { e: ObservableEmitter<Unit> ->
+    override fun removeIgnoreContact(contact: Contact): Observable<Contact> {
+        return Observable.create { e: ObservableEmitter<Contact> ->
             val results = realm.where(Contact::class.java).equalTo("phoneNumberString", contact.phoneNumberString).findAll()
             realm.beginTransaction()
             results.deleteAllFromRealm()
-            e.onNext(realm.commitTransaction())
+            realm.commitTransaction()
+            e.onNext(contact)
             e.onComplete()
         }.subscribeOnMainThread()
     }
