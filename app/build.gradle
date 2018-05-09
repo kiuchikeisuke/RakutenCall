@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:preference-v7:27.1.1'
     implementation 'com.android.support:preference-v14:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.google.dagger:dagger:2.+'
     implementation 'com.google.dagger:dagger-android:2.+'
     implementation 'com.google.dagger:dagger-android-support:2.+'

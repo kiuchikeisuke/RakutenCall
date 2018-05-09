@@ -33,9 +33,9 @@
     <string name="default_prefix_num">003768</string>
 
     <string name="key_free_dial">free_dial</string>
-    <string name="title_free_dial">フリーダイアル番号を無視する</string>
-    <string name="summary_on_free_dial">フリーダイアル番号の場合、\nプレフィックスをつけない</string>
-    <string name="summary_off_free_dial">フリーダイアル番号の場合でも、\nプレフィックスをつける</string>
+    <string name="title_free_dial">フリーダイアルを無視する</string>
+    <string name="summary_on_free_dial">フリーダイアルの場合、\nプレフィックスをつけない</string>
+    <string name="summary_off_free_dial">フリーダイアルの場合でも、\nプレフィックスをつける</string>
 
     <string name="key_special_num">special_num</string>
     <string name="title_special_num">特殊番号を無視する</string>

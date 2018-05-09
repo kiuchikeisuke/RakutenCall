@@ -5,7 +5,6 @@ import jp.ne.nissing.rakutencall.data.entity.app.PackageInfo
 import jp.ne.nissing.rakutencall.data.entity.prefix.IgnorePrefix
 
 interface SettingDataSource {
-    fun initPreference(): Observable<Unit>
 
     fun setUseAppPackageInfo(packageInfo: PackageInfo): Observable<Unit>
     fun getUseAppPackageInfo(): Observable<PackageInfo>

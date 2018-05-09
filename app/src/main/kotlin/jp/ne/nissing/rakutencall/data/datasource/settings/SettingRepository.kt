@@ -10,21 +10,6 @@ import javax.inject.Inject
 class SettingRepository @Inject constructor(private val sharedPreferences: SharedPreferences) : SettingDataSource {
     private val edit: SharedPreferences.Editor by lazy { sharedPreferences.edit() }
 
-    override fun initPreference(): Observable<Unit> {
-        return Observable.create {
-            val phoneApp = sharedPreferences.getString(KEY_PHONE_APP_LIST, "")
-            if (phoneApp.isEmpty()) {
-                val packageName = sharedPreferences.getString(KEY_PACKAGE, "")
-                val activityName = sharedPreferences.getString(KEY_ACTIVITY, "")
-                if (activityName.isNotEmpty() && packageName.isNotEmpty()) {
-                    edit.putString(KEY_PHONE_APP_LIST, PackageInfo(packageName, activityName).getUriString())
-                    edit.apply()
-                }
-            }
-            it.onComplete()
-        }
-    }
-
     override fun setUseAppPackageInfo(packageInfo: PackageInfo): Observable<Unit> {
         return Observable.create {
             edit.putString(KEY_PHONE_APP_LIST, packageInfo.getUriString())
@@ -160,10 +145,6 @@ class SettingRepository @Inject constructor(private val sharedPreferences: Share
         //AndroidL以降のパッケージ名、アプリ名
         private const val DEFAULT_VALUE_PACKAGE_L = "com.android.server.telecom"
         private const val DEFALUT_VALUE_ACTIVITY_L = "com.android.server.telecom.CallActivity"
-
-
-        private const val KEY_PACKAGE = "package_name"
-        private const val KEY_ACTIVITY = "activity_name"
 
     }
 }
