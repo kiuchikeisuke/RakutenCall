@@ -15,7 +15,8 @@ class IgnoreContactListActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base_activity)
-
+        supportActionBar!!.setIcon(R.drawable.ic_launcher_small)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
         var fragment = supportFragmentManager.findFragmentById(R.id.base_fragment) as IgnoreContactListFragment?
         if (fragment == null) {
             fragment = IgnoreContactListFragment.newInstance()

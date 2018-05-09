@@ -3,7 +3,7 @@
           package="jp.ne.nissing.rakutencall"
           android:versionCode="17"
           android:versionName="4.0.0">
-    
+
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
@@ -57,8 +57,7 @@
             android:name=".presenter.settings.SettingsActivity"
             android:theme="@style/SettingsTheme"/>
         <activity
-            android:name=".presenter.contacts.IgnoreContactListActivity"
-            android:theme="@style/AppTheme">
+            android:name=".presenter.contacts.IgnoreContactListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
