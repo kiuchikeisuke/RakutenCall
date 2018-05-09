@@ -13,18 +13,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/checkBoxImageView"
+        <CheckBox
+            android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:focusable="false"
+            android:clickable="false"
             app:layout_constraintBottom_toTopOf="@+id/border"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/checkbox"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/displayNameTextView"
@@ -36,7 +37,7 @@
             android:layout_marginTop="2dp"
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/telNumberTextView"
-            app:layout_constraintStart_toEndOf="@+id/checkBoxImageView"
+            app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toTopOf="parent"
             tools:textSize="24sp"/>
 
@@ -49,7 +50,7 @@
             android:layout_marginStart="8dp"
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/border"
-            app:layout_constraintStart_toEndOf="@+id/checkBoxImageView"
+            app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toBottomOf="@+id/displayNameTextView"
             tools:textSize="18sp"/>
 
