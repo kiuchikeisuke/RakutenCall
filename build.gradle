@@ -11,18 +11,20 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'io.realm:realm-gradle-plugin:+'
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
     }
-    apply from: "$rootDir.absolutePath/versions.gradle" 
+    apply from: "$rootDir.absolutePath/versions.gradle"
 
 }
+
 
 allprojects {
     repositories {
         jcenter()
         google()
+        maven { url "http://dl.bintray.com/jetbrains/spek" }
     }
 }
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir

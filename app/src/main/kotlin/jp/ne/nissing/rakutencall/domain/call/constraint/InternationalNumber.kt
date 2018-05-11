@@ -33,13 +33,13 @@ class InternationalNumber @Inject constructor(
                         })
     }
 
-    private fun validateInternationalPrefix(t2: List<IdentificationPrefix>, requestValue: Request, t3: List<InternationalPrefix>, t4: List<InternationalPrefix>): Response {
+    private fun validateInternationalPrefix(t2: List<IdentificationPrefix>, requestValue: Request, enableList: List<InternationalPrefix>, disableList: List<InternationalPrefix>): Response {
         val identificationPrefix = t2.find { it.startWithPrefix(requestValue.phoneNumber) }
         return if (identificationPrefix == null) {
             Response(requestValue.prefix)
         } else {
-            if (t3.none { it.startWithPrefix(requestValue.phoneNumber.removePrefix(identificationPrefix)) }
-                    || t4.any { it.startWithPrefix(requestValue.phoneNumber.removePrefix(identificationPrefix)) }) {
+            if (enableList.any { it.startWithPrefix(requestValue.phoneNumber.removePrefix(identificationPrefix)) } &&
+                    disableList.none { it.startWithPrefix(requestValue.phoneNumber.removePrefix(identificationPrefix)) }) {
                 Response(Prefix.generateEmptyPrefix())
             } else {
                 Response(requestValue.prefix)
