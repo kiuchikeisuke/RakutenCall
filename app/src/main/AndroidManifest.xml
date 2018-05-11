@@ -43,7 +43,7 @@
             android:theme="@android:style/Theme.Translucent"/>
         <activity
             android:name=".presenter.call.CallActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.CALL"/>
                 <action android:name="android.intent.action.CALL_PRIVILEGED"/>
