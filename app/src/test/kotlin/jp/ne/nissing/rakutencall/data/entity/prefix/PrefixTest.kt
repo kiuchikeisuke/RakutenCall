@@ -1,6 +1,7 @@
 package jp.ne.nissing.rakutencall.data.entity.prefix
 
 import jp.ne.nissing.rakutencall.data.entity.number.PhoneNumber
+import junit.framework.Assert
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
@@ -21,15 +22,15 @@ object PrefixTest : Spek({
         on("equal method") {
             it("should be equal EmptyPrefix") {
                 val expectedPrefix = EmptyPrefix()
-                assert(emptyPrefix == expectedPrefix)
+                Assert.assertEquals(expectedPrefix, emptyPrefix)
             }
             it("should be not equal") {
                 val expectedPrefix = IgnorePrefix("12345")
-                assert(emptyPrefix != expectedPrefix)
+                Assert.assertNotSame(expectedPrefix, emptyPrefix)
             }
             it("should be equal IgnorePrefix(empty)") {
                 val expectedPrefix = IgnorePrefix("")
-                assert(emptyPrefix == expectedPrefix)
+                Assert.assertEquals(expectedPrefix, emptyPrefix)
             }
         }
     }
@@ -38,7 +39,7 @@ object PrefixTest : Spek({
         on("equal method") {
             it("should not be equal EmptyPrefix") {
                 val expectedPrefix = EmptyPrefix()
-                assert(freeDialPrefix != expectedPrefix)
+                Assert.assertNotSame(expectedPrefix, freeDialPrefix)
             }
         }
     }
@@ -47,7 +48,7 @@ object PrefixTest : Spek({
         on("equal method") {
             it("should not be equal EmptyPrefix") {
                 val expectedPrefix = EmptyPrefix()
-                assert(identificationPrefix != expectedPrefix)
+                Assert.assertNotSame(expectedPrefix, identificationPrefix)
             }
         }
     }
@@ -56,7 +57,7 @@ object PrefixTest : Spek({
         on("equal method") {
             it("should not be equal EmptyPrefix") {
                 val expectedPrefix = EmptyPrefix()
-                assert(ignorePrefix != expectedPrefix)
+                Assert.assertNotSame(expectedPrefix, ignorePrefix)
             }
         }
     }
@@ -65,7 +66,7 @@ object PrefixTest : Spek({
         on("equal method") {
             it("should not be equal EmptyPrefix") {
                 val expectedPrefix = EmptyPrefix()
-                assert(internationalPrefix != expectedPrefix)
+                Assert.assertNotSame(expectedPrefix, internationalPrefix)
             }
         }
     }
@@ -74,7 +75,7 @@ object PrefixTest : Spek({
         on("equal method") {
             it("should not be equal EmptyPrefix") {
                 val expectedPrefix = EmptyPrefix()
-                assert(specialPrefix != expectedPrefix)
+                Assert.assertNotSame(expectedPrefix, specialPrefix)
             }
         }
     }
@@ -82,10 +83,10 @@ object PrefixTest : Spek({
         val ignorePrefix: Prefix = IgnorePrefix("12345")
         on("startWith method") {
             it("should be true ") {
-                assert(ignorePrefix.startWithPrefix(PhoneNumber("123456789")))
+                Assert.assertTrue(ignorePrefix.startWithPrefix(PhoneNumber("123456789")))
             }
             it("should be false") {
-                assert(!ignorePrefix.startWithPrefix(PhoneNumber("0123456789")))
+                Assert.assertFalse(ignorePrefix.startWithPrefix(PhoneNumber("0123456789")))
             }
         }
     }
