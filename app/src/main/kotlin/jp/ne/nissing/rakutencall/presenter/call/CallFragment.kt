@@ -37,7 +37,7 @@ class CallFragment : Fragment(), Injectable, CallContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        presenterVM.validateTelephoneNumber(TelephoneNumber(arguments!!.getString(ORIGINAL_TEL)), next = loadedValidatePhoneNumber)
+        presenterVM.validateTelephoneNumber(TelephoneNumber.decodeToUTF8TelephoneNumber(arguments!!.getString(ORIGINAL_TEL)), next = loadedValidatePhoneNumber)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

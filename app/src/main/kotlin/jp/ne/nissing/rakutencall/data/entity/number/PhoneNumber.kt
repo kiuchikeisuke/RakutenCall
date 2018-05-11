@@ -1,6 +1,7 @@
 package jp.ne.nissing.rakutencall.data.entity.number
 
 import jp.ne.nissing.rakutencall.data.entity.prefix.Prefix
+import java.net.URLDecoder
 
 class PhoneNumber(val number: String) {
     init {
@@ -8,6 +9,8 @@ class PhoneNumber(val number: String) {
             throw IllegalArgumentException("PhoneNumber does not start with 'tel:'")
         } else if (number.isEmpty()) {
             throw IllegalArgumentException("number must not be Empty")
+        } else if ((number.contains(Regex(".*[^0-9#¥+¥*() -]+.*")))) {
+            throw IllegalArgumentException("contains illegal char. number = $number")
         }
     }
 
@@ -29,4 +32,8 @@ class PhoneNumber(val number: String) {
 
     fun startWithPrefix(prefix: Prefix): Boolean = number.startsWith(prefix.number)
     fun generateTelephoneNumber() = TelephoneNumber(TelephoneNumber.SCHEME + number)
+
+    companion object {
+        fun decodeToUTF8PhoneNumber(number: String) = PhoneNumber(URLDecoder.decode(number, "UTF-8"))
+    }
 }
