@@ -92,6 +92,9 @@ dependencies {
     }
     testImplementation 'org.mockito:mockito-core:+'
     testImplementation 'org.junit.platform:junit-platform-runner:1.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:+"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:+"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:+"
 }
 
 

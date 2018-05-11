@@ -2,7 +2,7 @@ package jp.ne.nissing.rakutencall.data.entity.number
 
 import jp.ne.nissing.rakutencall.data.entity.prefix.Prefix
 
-open class PhoneNumber(val number: String) {
+class PhoneNumber(val number: String) {
     init {
         if (number.startsWith(TelephoneNumber.SCHEME)) {
             throw IllegalArgumentException("PhoneNumber does not start with 'tel:'")
@@ -19,7 +19,14 @@ open class PhoneNumber(val number: String) {
     }
 
     fun addPrefix(prefix: Prefix): PhoneNumber = PhoneNumber(prefix.number + number)
-    fun removePrefix(prefix: Prefix): PhoneNumber = PhoneNumber(number.substring(prefix.number.length))
+    fun removePrefix(prefix: Prefix): PhoneNumber {
+        return if (this.startWithPrefix(prefix)) {
+            PhoneNumber(number.substring(prefix.number.length))
+        } else {
+            PhoneNumber(number)
+        }
+    }
+
     fun startWithPrefix(prefix: Prefix): Boolean = number.startsWith(prefix.number)
     fun generateTelephoneNumber() = TelephoneNumber(TelephoneNumber.SCHEME + number)
 }
