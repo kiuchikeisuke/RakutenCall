@@ -1,5 +1,6 @@
 package jp.ne.nissing.rakutencall.presenter.contacts
 
+import android.Manifest
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -11,8 +12,11 @@ import jp.ne.nissing.rakutencall.data.entity.contact.Contact
 import jp.ne.nissing.rakutencall.databinding.FragmentIgnoreContactListBinding
 import jp.ne.nissing.rakutencall.domain.contacts.GetContactsInfo
 import jp.ne.nissing.rakutencall.utils.di.Injectable
+import permissions.dispatcher.NeedsPermission
+import permissions.dispatcher.RuntimePermissions
 import javax.inject.Inject
 
+@RuntimePermissions
 class IgnoreContactListFragment : Fragment(), Injectable, IgnoreContactListContract.View {
     private val loadedContacts: (GetContactsInfo.Response) -> Unit = ::loadedContacts
 
@@ -51,6 +55,11 @@ class IgnoreContactListFragment : Fragment(), Injectable, IgnoreContactListContr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadContacts()
+    }
+
+    @NeedsPermission(Manifest.permission.READ_CONTACTS)
+    fun loadContacts() {
         presenterVM.loadContacts(loadedContacts)
     }
 

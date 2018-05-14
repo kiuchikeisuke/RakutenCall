@@ -79,6 +79,10 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:+'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'android.arch.lifecycle:reactivestreams:+'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:+'
+    implementation('com.github.hotchemi:permissionsdispatcher:+') {
+        exclude module: "support-v13"
+    }
     kapt 'com.google.dagger:dagger-compiler:2.+'
     kapt 'com.google.dagger:dagger-android-processor:2.+'
     testImplementation 'junit:junit:4.12'
