@@ -22,6 +22,12 @@ import javax.inject.Inject
 
 class CallFragment : Fragment(), Injectable, CallContract.View {
 
+    override fun validateError(throwable: Throwable, telephoneNumber: TelephoneNumber) {
+        if (throwable is IllegalArgumentException) {
+            Toast.makeText(context, getString(R.string.call_illegal_telephone_number_toast, telephoneNumber.number), Toast.LENGTH_LONG).show()
+        }
+    }
+
     private val loadedValidatePhoneNumber: (ValidatePhoneNumber.Response) -> Unit = ::loadedValidatePhoneNumber
     private val startPhone: (GetUsePackageInfo.Response) -> Unit = ::startPhone
     private lateinit var validatedPhoneNumber: TelephoneNumber
@@ -35,9 +41,11 @@ class CallFragment : Fragment(), Injectable, CallContract.View {
 
     private lateinit var binding: FragmentCallBinding
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        presenterVM.validateTelephoneNumber(TelephoneNumber.decodeToUTF8TelephoneNumber(arguments!!.getString(ORIGINAL_TEL)), next = loadedValidatePhoneNumber)
+        val telephoneNumber = TelephoneNumber.decodeToUTF8TelephoneNumber(arguments!!.getString(ORIGINAL_TEL))
+        presenterVM.validateTelephoneNumber(telephoneNumber, next = loadedValidatePhoneNumber, error = { validateError(it, telephoneNumber) })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,8 +65,8 @@ class CallFragment : Fragment(), Injectable, CallContract.View {
         try {
             startActivity(intent)
         } catch (e: ActivityNotFoundException) {
-            SettingsActivity.launch(context!!)
             Toast.makeText(context, R.string.call_not_found_app_error_toast, Toast.LENGTH_LONG).show()
+            SettingsActivity.launch(context!!)
         }
         activity!!.finish()
     }

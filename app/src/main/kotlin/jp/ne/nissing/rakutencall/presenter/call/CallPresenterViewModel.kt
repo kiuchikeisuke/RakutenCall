@@ -13,8 +13,8 @@ class CallPresenterViewModel @Inject constructor(
         getUsePackageInfo.execute(next = next)
     }
 
-    override fun validateTelephoneNumber(originalTelephoneNumber: TelephoneNumber, next: (ValidatePhoneNumber.Response) -> Unit) {
-        validatePhoneNumber.execute(ValidatePhoneNumber.Request(originalTelephoneNumber.generatePhoneNumber()), next)
+    override fun validateTelephoneNumber(originalTelephoneNumber: TelephoneNumber, next: (ValidatePhoneNumber.Response) -> Unit, error: (Throwable) -> Unit) {
+        validatePhoneNumber.execute(ValidatePhoneNumber.Request(originalTelephoneNumber.generatePhoneNumber()), next, error)
     }
 
     override fun onCleared() {

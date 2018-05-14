@@ -10,11 +10,12 @@ interface CallContract {
 
     interface View : BaseView {
         fun loadedValidatePhoneNumber(response: ValidatePhoneNumber.Response)
+        fun validateError(throwable: Throwable, telephoneNumber: TelephoneNumber)
         fun startPhone(response: GetUsePackageInfo.Response)
     }
 
     interface Presenter : BasePresenter {
-        fun validateTelephoneNumber(originalTelephoneNumber: TelephoneNumber, next: (ValidatePhoneNumber.Response) -> Unit)
+        fun validateTelephoneNumber(originalTelephoneNumber: TelephoneNumber, next: (ValidatePhoneNumber.Response) -> Unit, error: (Throwable) -> Unit)
         fun loadPhoneApp(next: (GetUsePackageInfo.Response) -> Unit)
     }
 }
