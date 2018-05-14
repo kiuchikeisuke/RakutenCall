@@ -12,21 +12,20 @@ android {
     defaultConfig {
         applicationId "jp.ne.nissing.rakutencall"
         minSdkVersion 14
-        targetSdkVersion 18
+        targetSdkVersion 27
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             debuggable false
             zipAlignEnabled true
             shrinkResources true
 
-            proguardFiles {
-                getDefaultProguardFile('proguard-android.txt')
-                "proguard-rules.pro"
-            }
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            // global proguard settings
+            proguardFile file("proguard-rules.pro")
+            // library proguard settings
             def files = rootProject.file("proguard")
                     .listFiles()
                     .findAll { it.name.startsWith("proguard") }
@@ -77,7 +76,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'androidx.core:core-ktx:0.3'
     implementation 'com.jakewharton.timber:timber:+'
-    implementation 'com.squareup.leakcanary:leakcanary-android:+'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:+'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'android.arch.lifecycle:reactivestreams:+'
     kapt 'com.google.dagger:dagger-compiler:2.+'
