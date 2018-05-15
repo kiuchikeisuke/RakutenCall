@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">らくでん</string>
+
+    <!-- Call -->
+    <string name="call_not_found_app_error_toast">正しくアプリを認識できませんでした。らくでんの設定から電話アプリを設定してください</string>
+    <string name="call_illegal_telephone_number_toast">無効な電話番号です:%1$s</string>
+    <string name="call_permission_denide_toast">電話へのアクセスが拒否されたため、電話アプリを起動できませんでした</string>
+    <!-- privacy policy -->
+    <string name="privacy_policy_url">http://minismahn.hatenablog.com/entry/2017/02/04/200505</string>
+
+    <!-- Ignore Contact -->
+    <string name="ignore_list_title">プレフィックスをつけない宛先をチェックしてください</string>
+    <string name="contacts_permission_denied_toast">電話帳へのアクセスが拒否されたため、電話帳のデータが取得できませんでした</string>
+    <!-- Menu Items -->
+    <string name="menu_setting">設定</string>
+    <string name="menu_privacy_policy">プライバシーポリシー</string>
+
+    <!-- settings preference -->
+    <string name="key_phone_app_list">phone_app_list</string>
+    <string name="title_phone_app_list">起動する電話アプリ</string>
+    <string name="title_dialog_phone_app_list">起動させる電話アプリを選択</string>
+
+    <string name="key_prefix_enable">prefix_enable</string>
+    <string name="title_prefix_enable">プレフィックス機能</string>
+    <string name="summary_on_prefix_enable">プレフィックスをつける</string>
+    <string name="summary_off_prefix_enable">プレフィックスをつけない</string>
+
+    <string name="key_prefix_num">prefix_num</string>
+    <string name="title_prefix_num">プレフィックス番号</string>
+    <string name="title_prefix_num_dialog">先頭につける番号を入力</string>
+    <string name="hint_prefix_num_dialog">デフォルトは「003768」</string>
+    <string name="default_prefix_num">003768</string>
+
+    <string name="key_free_dial">free_dial</string>
+    <string name="title_free_dial">フリーダイアルを無視する</string>
+    <string name="summary_on_free_dial">フリーダイアルの場合、\nプレフィックスをつけない</string>
+    <string name="summary_off_free_dial">フリーダイアルの場合でも、\nプレフィックスをつける</string>
+
+    <string name="key_special_num">special_num</string>
+    <string name="title_special_num">特殊番号を無視する</string>
+    <string name="summary_on_special_num">5桁以下,及び#,*始まりの番号は\nプレフィックスをつけない</string>
+    <string name="summary_off_special_num">5桁以下,及び#,*始まりの番号でも\nプレフィックスをつける</string>
+
+    <string name="key_international_num">international_num</string>
+    <string name="title_international_num">国際電話対応</string>
+    <string name="summary_on_international_num">楽天でんわ対応国際電話番号にプレフィックスをつける</string>
+    <string name="summary_off_international_num">楽天でんわ対応国際電話番号でもプレフィックスをつけない</string>
+
+    <string name="key_show_adbuddiz">show_adbuddiz</string>
+    <string name="title_show_adbuddiz">広告の表示設定</string>
+    <string name="summary_on_show_adbuddiz">広告を表示する</string>
+    <string name="summary_off_show_adbuddiz">広告を表示しない</string>
+</resources>

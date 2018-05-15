@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="free_dial_prefixes">
+        <item>0120</item>
+        <item>0077</item>
+        <item>0088</item>
+        <item>0570</item>
+        <item>0800</item>
+    </string-array>
+    <string-array name="special_prefixes">
+        <item>#</item>
+        <item>*</item>
+    </string-array>
+    <string-array name="identification_prefixes">
+        <item>010</item>
+        <item>001010</item>
+        <item>+</item>
+    </string-array>
+    <string-array name="international_enable_prefixes">
+        <!-- Asia -->
+        <item>82</item>
+        <item>852</item>
+        <item>65</item>
+        <item>86</item>
+        <item>886</item>
+        <item>853</item>
+        <item>63</item>
+        <item>673</item>
+        <item>62</item>
+        <item>60</item>
+        <item>66</item>
+        <item>84</item>
+        <!-- America -->
+        <item>1</item>
+        <item>55</item>
+        <!-- Oceania -->
+        <item>61</item>
+        <item>64</item>
+        <!-- Europe -->
+        <item>33</item>
+        <item>49</item>
+        <item>44</item>
+        <item>39</item>
+        <item>32</item>
+        <item>30</item>
+        <item>31</item>
+        <item>34</item>
+        <item>41</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="international_disable_prefixes">
+        <!-- Asia -->
+        <!-- America -->
+        <!-- Oceania -->
+        <item>6189164</item>
+        <item>6189162</item>
+        <!-- Europe -->
+        <item>33836</item>
+        <item>33890</item>
+        <item>33891</item>
+        <item>33892</item>
+        <item>33893</item>
+        <item>33897</item>
+        <item>33898</item>
+        <item>33899</item>
+        <item>34902</item>
+        <item>7903</item>
+        <item>7905</item>
+        <item>7906</item>
+        <item>7909</item>
+        <item>7954</item>
+        <item>7960</item>
+        <item>7961</item>
+        <item>7962</item>
+        <item>7963</item>
+        <item>7964</item>
+        <item>7965</item>
+        <item>7966</item>
+        <item>7967</item>
+        <item>7968</item>
+    </string-array>
+</resources>
