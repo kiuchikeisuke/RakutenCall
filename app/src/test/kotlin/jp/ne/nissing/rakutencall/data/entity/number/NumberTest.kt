@@ -178,19 +178,19 @@ object NumberTest : Spek({
             }
             given("ASCII Code Input") {
                 on("decodeToUTF8PhoneNumber: %23 (#)") {
-                    it("should be ") {
+                    it("should be tel:#12344445555") {
                         val expected = TelephoneNumber("tel:#12344445555")
                         assertEquals(expected, TelephoneNumber.decodeToUTF8TelephoneNumber("tel:%2312344445555"))
                     }
                 }
                 on("decodeToUTF8PhoneNumber: %2A (*)") {
-                    it("should be ") {
+                    it("should be tel:123*44445555") {
                         val expected = TelephoneNumber("tel:123*44445555")
                         assertEquals(expected, TelephoneNumber.decodeToUTF8TelephoneNumber("tel:123%2A44445555"))
                     }
                 }
                 on("decodeToUTF8PhoneNumber: %2B (+)") {
-                    it("should be ") {
+                    it("should be tel:12344445555+") {
                         val expected = TelephoneNumber("tel:12344445555+")
                         assertEquals(expected, TelephoneNumber.decodeToUTF8TelephoneNumber("tel:12344445555%2B"))
                     }
