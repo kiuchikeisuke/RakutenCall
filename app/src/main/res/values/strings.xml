@@ -6,12 +6,13 @@
     <!-- Call -->
     <string name="call_not_found_app_error_toast">正しくアプリを認識できませんでした。らくでんの設定から電話アプリを設定してください</string>
     <string name="call_illegal_telephone_number_toast">無効な電話番号です:%1$s</string>
+    <string name="call_permission_denide_toast">電話へのアクセスが拒否されたため、電話アプリを起動できませんでした</string>
     <!-- privacy policy -->
     <string name="privacy_policy_url">http://minismahn.hatenablog.com/entry/2017/02/04/200505</string>
 
     <!-- Ignore Contact -->
     <string name="ignore_list_title">プレフィックスをつけない宛先をチェックしてください</string>
-
+    <string name="contacts_permission_denied_toast">電話帳へのアクセスが拒否されたため、電話帳のデータが取得できませんでした</string>
     <!-- Menu Items -->
     <string name="menu_setting">設定</string>
     <string name="menu_privacy_policy">プライバシーポリシー</string>

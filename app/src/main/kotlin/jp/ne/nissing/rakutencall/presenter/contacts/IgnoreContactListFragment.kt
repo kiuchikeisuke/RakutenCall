@@ -8,15 +8,15 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.tbruyelle.rxpermissions2.RxPermissions
+import jp.ne.nissing.rakutencall.R
 import jp.ne.nissing.rakutencall.data.entity.contact.Contact
 import jp.ne.nissing.rakutencall.databinding.FragmentIgnoreContactListBinding
 import jp.ne.nissing.rakutencall.domain.contacts.GetContactsInfo
 import jp.ne.nissing.rakutencall.utils.di.Injectable
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.RuntimePermissions
 import javax.inject.Inject
 
-@RuntimePermissions
 class IgnoreContactListFragment : Fragment(), Injectable, IgnoreContactListContract.View {
     private val loadedContacts: (GetContactsInfo.Response) -> Unit = ::loadedContacts
 
@@ -55,12 +55,14 @@ class IgnoreContactListFragment : Fragment(), Injectable, IgnoreContactListContr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadContacts()
-    }
-
-    @NeedsPermission(Manifest.permission.READ_CONTACTS)
-    fun loadContacts() {
-        presenterVM.loadContacts(loadedContacts)
+        RxPermissions(activity!!).request(Manifest.permission.READ_CONTACTS)
+                .subscribe {
+                    if (it) {
+                        presenterVM.loadContacts(loadedContacts)
+                    } else {
+                        Toast.makeText(context, R.string.contacts_permission_denied_toast, Toast.LENGTH_LONG).show()
+                    }
+                }
     }
 
     companion object {

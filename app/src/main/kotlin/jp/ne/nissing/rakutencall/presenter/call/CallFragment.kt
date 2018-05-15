@@ -1,5 +1,6 @@
 package jp.ne.nissing.rakutencall.presenter.call
 
+import android.Manifest
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.ActivityNotFoundException
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
+import com.tbruyelle.rxpermissions2.RxPermissions
 import jp.ne.nissing.rakutencall.R
 import jp.ne.nissing.rakutencall.data.entity.number.TelephoneNumber
 import jp.ne.nissing.rakutencall.databinding.FragmentCallBinding
@@ -45,7 +47,15 @@ class CallFragment : Fragment(), Injectable, CallContract.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val telephoneNumber = TelephoneNumber.decodeToUTF8TelephoneNumber(arguments!!.getString(ORIGINAL_TEL))
-        presenterVM.validateTelephoneNumber(telephoneNumber, next = loadedValidatePhoneNumber, error = { validateError(it, telephoneNumber) })
+
+        RxPermissions(activity!!).request(Manifest.permission.CALL_PHONE).subscribe {
+            if (it) {
+                presenterVM.validateTelephoneNumber(telephoneNumber, next = loadedValidatePhoneNumber, error = { validateError(it, telephoneNumber) })
+            } else {
+                Toast.makeText(context, R.string.call_permission_denide_toast, Toast.LENGTH_LONG).show()
+                activity!!.finish()
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
