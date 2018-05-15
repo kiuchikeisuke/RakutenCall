@@ -15,7 +15,6 @@ class MainApplication : DaggerApplication() {
             val dbm = DatabaseManager.getInstance(this)
             dbm.open()
             val contacts = dbm.contacts
-            it.beginTransaction()
             while (contacts.moveToNext()) {
                 val telNumber = contacts.getString(contacts.getColumnIndex(DatabaseManager.COL_TEL_NUMBER))
                 val displayName = contacts.getString(contacts.getColumnIndex(DatabaseManager.COL_DISPLAYNAME))
@@ -23,12 +22,6 @@ class MainApplication : DaggerApplication() {
                 val contact = it.createObject(Contact::class.java, telNumber)
                 contact.contactId = contactId
                 contact.displayName = displayName
-                it.insert(contact)
-            }
-            if (contacts.count > 0) {
-                it.commitTransaction()
-            } else {
-                it.cancelTransaction()
             }
             dbm.close()
             this.deleteDatabase(DatabaseManager.DATABASE_NAME)

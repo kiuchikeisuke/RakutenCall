@@ -13,6 +13,7 @@ import jp.ne.nissing.rakutencall.R
 import jp.ne.nissing.rakutencall.domain.settings.GetAdSetting
 import jp.ne.nissing.rakutencall.domain.settings.GetIgnorePrefix
 import jp.ne.nissing.rakutencall.domain.settings.GetPhoneApps
+import jp.ne.nissing.rakutencall.utils.commons.Const
 import jp.ne.nissing.rakutencall.utils.di.Injectable
 import javax.inject.Inject
 
@@ -50,7 +51,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, SettingsContrac
     }
 
     override fun onCreatePreferences(p0: Bundle?, p1: String?) {
-        preferenceManager.sharedPreferencesName = getString(R.string.app_name)
+        preferenceManager.sharedPreferencesName = Const.APP_KEY
         addPreferencesFromResource(R.xml.preferences)
     }
 

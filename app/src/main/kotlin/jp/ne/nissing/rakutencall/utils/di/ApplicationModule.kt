@@ -11,7 +11,7 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import jp.ne.nissing.rakutencall.BuildConfig
 import jp.ne.nissing.rakutencall.MainApplication
-import jp.ne.nissing.rakutencall.R
+import jp.ne.nissing.rakutencall.utils.commons.Const
 import jp.ne.nissing.rakutencall.utils.commons.ExecutionThreads
 
 /* Module for Application */
@@ -21,13 +21,13 @@ class ApplicationModule {
     fun provideContext(application: MainApplication): Context = application
 
     @Provides
-    fun provideSharedPreference(application: MainApplication): SharedPreferences = application.getSharedPreferences(application.getString(R.string.app_name), Context.MODE_PRIVATE)
+    fun provideSharedPreference(application: MainApplication): SharedPreferences = application.getSharedPreferences(Const.APP_KEY, Context.MODE_PRIVATE)
 
     @Provides
     fun provideRealm(transaction: Realm.Transaction): Realm {
-        val builder = RealmConfiguration.Builder().name(APP_KEY)
-        builder.initialData(transaction)
-        return if (BuildConfig.DEBUG) {
+        val builder = RealmConfiguration.Builder().name(Const.APP_KEY)
+        builder.initialData(transaction).schemaVersion(Const.REALM_SCHEMA_VERSION)
+        return if (BuildConfig.BUILD_TYPE == "debug") {
             Realm.getInstance(builder.deleteRealmIfMigrationNeeded().build())
         } else {
             Realm.getInstance(builder.build())
@@ -43,9 +43,5 @@ class ApplicationModule {
             override fun ui(): Scheduler = AndroidSchedulers.mainThread()
             override fun io(): Scheduler = Schedulers.io()
         }
-    }
-
-    companion object {
-        private const val APP_KEY = "jp.ne.nissing.rakutencall"
     }
 }
