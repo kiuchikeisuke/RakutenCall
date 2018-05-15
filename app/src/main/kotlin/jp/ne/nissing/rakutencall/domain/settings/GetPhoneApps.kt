@@ -14,14 +14,15 @@ import javax.inject.Inject
 class GetPhoneApps @Inject constructor(
         private val phoneAppDataSource: PhoneAppDataSource,
         private val settingDataSource: SettingDataSource,
-        executionThreads: ExecutionThreads)
+        private val executionThreads: ExecutionThreads)
     : OutputOnlyUseCase<GetPhoneApps.Response, Throwable>(executionThreads) {
     override fun execute(): Observable<Response> {
-        return Observable.zip(phoneAppDataSource.getPhoneAppInfos(),
+        return (Observable.zip(phoneAppDataSource.getPhoneAppInfos(),
                 settingDataSource.getUseAppPackageInfo(),
-                BiFunction { t1, t2 ->
+                BiFunction<List<PhoneAppInfo>, PackageInfo, Response> { t1, t2 ->
                     Response(t1, t2)
-                })
+                }) as Observable<Response>).subscribeOn(executionThreads.ui())
+
     }
 
     data class Response(val phoneAppInfos: List<PhoneAppInfo>, val usePackageInfo: PackageInfo) : UseCase.ResponseValue

@@ -41,8 +41,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Injectable, SettingsContrac
             entries = response.phoneAppInfos.map { it.label }.toTypedArray()
             entryValues = response.phoneAppInfos.map { it.packageInfo.getUriString() }.toTypedArray()
             setDefaultValue(response.usePackageInfo.getUriString())
-            summary = response.phoneAppInfos.first { it.packageInfo == response.usePackageInfo }?.label
-            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
+            summary = response.phoneAppInfos.first { it.packageInfo == response.usePackageInfo }.label
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                 summary = response.phoneAppInfos.first { it.packageInfo.getUriString() == newValue }.label
                 true
             }
