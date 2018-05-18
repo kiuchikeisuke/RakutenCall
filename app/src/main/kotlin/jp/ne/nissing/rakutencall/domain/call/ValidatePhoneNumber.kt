@@ -18,7 +18,7 @@ class ValidatePhoneNumber @Inject constructor(
         private val specialNumber: SpecialNumber,
         private val specialLength: SpecialLength,
         private val startWithPrefix: StartWithPrefix,
-        executionThreads: ExecutionThreads)
+        private val executionThreads: ExecutionThreads)
     : IoUseCase<ValidatePhoneNumber.Request, ValidatePhoneNumber.Response, Throwable>(executionThreads) {
 
     override fun execute(requestValue: Request): Observable<Response> {
@@ -38,7 +38,7 @@ class ValidatePhoneNumber @Inject constructor(
             startWithPrefix.execute(StartWithPrefix.Request(it.prefix, requestValue.phoneNumber))
         }.map {
             Response(requestValue.phoneNumber.addPrefix(it.prefix))
-        }
+        }.subscribeOn(executionThreads.ui())
     }
 
     data class Request(val phoneNumber: PhoneNumber) : UseCase.RequestValue
