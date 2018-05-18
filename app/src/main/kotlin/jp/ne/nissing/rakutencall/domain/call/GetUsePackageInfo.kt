@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 class GetUsePackageInfo @Inject constructor(
         private val settingDataSource: SettingDataSource,
-        executionThreads: ExecutionThreads)
+        private val executionThreads: ExecutionThreads)
     : OutputOnlyUseCase<GetUsePackageInfo.Response, Throwable>(executionThreads) {
     override fun execute(): Observable<Response> {
-        return settingDataSource.getUseAppPackageInfo().map { Response(it) }
+        return settingDataSource.getUseAppPackageInfo().map { Response(it) }.subscribeOn(executionThreads.ui())
     }
 
     data class Response(val packageInfo: PackageInfo) : UseCase.ResponseValue

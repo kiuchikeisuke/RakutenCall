@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- Commons -->
     <string name="app_name">らくでん</string>
-
+    <string name="error">エラー</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <!-- Call -->
-    <string name="call_not_found_app_error_toast">正しくアプリを認識できませんでした。らくでんの設定から電話アプリを設定してください</string>
-    <string name="call_illegal_telephone_number_toast">無効な電話番号です:%1$s</string>
-    <string name="call_permission_denide_toast">電話へのアクセスが拒否されたため、電話アプリを起動できませんでした</string>
+    <string name="call_not_found_app_error_dialog_message">正しくアプリを認識できませんでした。らくでんの設定から電話アプリを設定してください</string>
+    <string name="call_illegal_telephone_number_dialog_message">無効な電話番号です:%1$s</string>
+    <string name="call_permission_denied_dialog_message">電話へのアクセスが拒否されたため、電話アプリを起動できませんでした\n電話アプリのアクセスを許可してください</string>
     <!-- privacy policy -->
     <string name="privacy_policy_url">http://minismahn.hatenablog.com/entry/2017/02/04/200505</string>
 

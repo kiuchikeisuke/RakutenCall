@@ -20,12 +20,20 @@ class SettingRepository @Inject constructor(private val sharedPreferences: Share
 
     override fun getUseAppPackageInfo(): Observable<PackageInfo> {
         return Observable.create {
-            val defPackageName = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) DEFAULT_VALUE_PACKAGE_L else DEFAULT_VALUE_PACKAGE
-            val defActivityName = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) DEFALUT_VALUE_ACTIVITY_L else DEFALUT_VALUE_ACTIVITY
-            val defPackageInfo = PackageInfo(defPackageName, defActivityName)
+            val defPackageInfo = getDefaultPackageInfo()
             val packageUriString = sharedPreferences.getString(KEY_PHONE_APP_LIST, defPackageInfo.getUriString())
             it.onNext(PackageInfo.parseUriString(packageUriString))
             it.onComplete()
+        }
+    }
+    
+    private fun getDefaultPackageInfo(): PackageInfo {
+        return if ( Build.VERSION_CODES.M <= Build.VERSION.SDK_INT) {
+            PackageInfo(DEFAULT_VALUE_PACKAGE_M, DEFAULT_VALUE_ACTIVITY_M)
+        } else if ( Build.VERSION_CODES.LOLLIPOP <= Build.VERSION.SDK_INT && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            PackageInfo(DEFAULT_VALUE_PACKAGE_L, DEFAULT_VALUE_ACTIVITY_L)
+        } else {
+            PackageInfo(DEFAULT_VALUE_PACKAGE_LEGACY, DEFALUT_VALUE_ACTIVITY_LEGACY)
         }
     }
 
@@ -140,11 +148,14 @@ class SettingRepository @Inject constructor(private val sharedPreferences: Share
         private const val DEFAULT_VALUE_INTERNATIONAL_NUM = true
 
         //AndroidLより前のパッケージ名、アプリ名
-        private const val DEFAULT_VALUE_PACKAGE = "com.android.phone"
-        private const val DEFALUT_VALUE_ACTIVITY = "com.android.phone.OutgoingCallBroadcaster"
+        private const val DEFAULT_VALUE_PACKAGE_LEGACY = "com.android.phone"
+        private const val DEFALUT_VALUE_ACTIVITY_LEGACY = "com.android.phone.OutgoingCallBroadcaster"
         //AndroidL以降のパッケージ名、アプリ名
         private const val DEFAULT_VALUE_PACKAGE_L = "com.android.server.telecom"
-        private const val DEFALUT_VALUE_ACTIVITY_L = "com.android.server.telecom.CallActivity"
+        private const val DEFAULT_VALUE_ACTIVITY_L = "com.android.server.telecom.CallActivity"
+        //AndroidM以降のパッケージ名、アプリ名
+        private const val DEFAULT_VALUE_PACKAGE_M = "com.android.server.telecom"
+        private const val DEFAULT_VALUE_ACTIVITY_M = "com.android.server.telecom.components.UserCallActivity"
 
     }
 }

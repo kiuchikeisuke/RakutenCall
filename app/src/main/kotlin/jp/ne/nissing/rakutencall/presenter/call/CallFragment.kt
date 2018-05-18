@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,12 @@ class CallFragment : Fragment(), Injectable, CallContract.View {
 
     override fun validateError(throwable: Throwable, telephoneNumber: TelephoneNumber) {
         if (throwable is IllegalArgumentException) {
-            Toast.makeText(context, getString(R.string.call_illegal_telephone_number_toast, telephoneNumber.number), Toast.LENGTH_LONG).show()
+            AlertDialog.Builder(context!!)
+                    .setTitle(R.string.error)
+                    .setMessage(getString(R.string.call_illegal_telephone_number_dialog_message, telephoneNumber.number))
+                    .setPositiveButton(R.string.ok) { _, _ ->
+                        activity!!.finish()
+                    }.show()
         }
     }
 
@@ -52,8 +58,12 @@ class CallFragment : Fragment(), Injectable, CallContract.View {
             if (it) {
                 presenterVM.validateTelephoneNumber(telephoneNumber, next = loadedValidatePhoneNumber, error = { validateError(it, telephoneNumber) })
             } else {
-                Toast.makeText(context, R.string.call_permission_denide_toast, Toast.LENGTH_LONG).show()
-                activity!!.finish()
+                AlertDialog.Builder(context!!)
+                        .setTitle(R.string.error)
+                        .setMessage(R.string.call_permission_denied_dialog_message)
+                        .setPositiveButton(R.string.ok) { _, _ ->
+                            activity!!.finish()
+                        }.show()
             }
         }
     }
@@ -74,11 +84,16 @@ class CallFragment : Fragment(), Injectable, CallContract.View {
         }
         try {
             startActivity(intent)
+            activity!!.finish()
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(context, R.string.call_not_found_app_error_toast, Toast.LENGTH_LONG).show()
-            SettingsActivity.launch(context!!)
+            AlertDialog.Builder(context!!)
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.call_not_found_app_error_dialog_message)
+                    .setPositiveButton(R.string.ok) { _, _ ->
+                        SettingsActivity.launch(context!!)
+                        activity!!.finish()
+                    }.show()
         }
-        activity!!.finish()
     }
 
     companion object {
