@@ -43,5 +43,4 @@ jobs:
           destination: apk/app-debug.apk
       - run:
           name: deploy to DeployGate
-          command:
-            - curl -F "token=${DEPLOY_GATE_API_KEY}" -F "file=@app/build/outputs/apk/app-debug.apk" -F "message=build num is ${CIRCLE_BUILD_NUM}" https://deploygate.com/api/users/kiuchikeisuke/apps
+          command: curl -F "token=${DEPLOY_GATE_API_KEY}" -F "file=@app/build/outputs/apk/app-debug.apk" -F "message=build num is ${CIRCLE_BUILD_NUM}" https://deploygate.com/api/users/kiuchikeisuke/apps
