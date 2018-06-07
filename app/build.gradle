@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'deploygate'
 
 
 android {
@@ -94,4 +95,7 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:+"
 }
 
-
+deploygate {
+    userName = "kiuchikeisuke"
+    token = System.getenv("DEPLOY_GATE_API_KEY")
+}
