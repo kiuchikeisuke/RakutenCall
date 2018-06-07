@@ -1,7 +1,7 @@
 package jp.ne.nissing.rakutencall.data.entity.prefix
 
 import jp.ne.nissing.rakutencall.data.entity.number.PhoneNumber
-import junit.framework.Assert
+import org.junit.Assert
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it

@@ -1,7 +1,7 @@
 package jp.ne.nissing.rakutencall.data.entity.number
 
 import jp.ne.nissing.rakutencall.data.entity.prefix.IgnorePrefix
-import junit.framework.Assert
+import org.junit.Assert
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.*
 import org.junit.platform.runner.JUnitPlatform
