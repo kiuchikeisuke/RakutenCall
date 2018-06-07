@@ -47,7 +47,7 @@ jobs:
             if [ $CIRCLE_BRANCH = 'master' ]; then
               ./gradlew :app:uploadDeployGateDebug
             fi
-          command: ./deploy.sh
+          # command: ./deploy.sh authが通らないのでコマンドから実行する
 #      - run:
 #          name: build release
 #          command: |
