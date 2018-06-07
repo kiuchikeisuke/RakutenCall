@@ -34,7 +34,7 @@ jobs:
       - store_test_results:
           path: app/build/test-results
       - run:
-          name: build debug
+          name: build
           command: |
            ./gradlew clean
            ./gradlew assembleDebug
@@ -43,16 +43,7 @@ jobs:
           destination: apk/app-debug.apk
       - run:
           name: deploy to DeployGate
-#          command: |
-#            if [ $CIRCLE_BRANCH = 'master' ]; then
-#              ./gradlew :app:loginDeployGate
-#              ./gradlew :app:uploadDeployGateDebug
-#            fi
-          command: | 
-            ./gradlew :app:loginDeployGate
-            curl -F "file=@app/build/outputs/apk/debug/app-debug.apk" -F "token=${DEPLOY_GATE_API_KEY}" -F "message=build num is ${CIRCLE_BUILD_NUM}" https://deploygate.com/api/users/kiuchikeisuke/apps
-#      - run:
-#          name: build release
-#          command: |
-#           ./gradlew clean
-#           ./gradlew
+          command: |
+            if [ $CIRCLE_BRANCH = 'master' ]; then
+              ./gradlew :app:uploadDeployGateDebug
+            fi
