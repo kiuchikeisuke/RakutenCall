@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/kiuchikeisuke/RakutenCall.svg?style=svg)](https://circleci.com/gh/kiuchikeisuke/RakutenCall)
+
 # RakutenCall
 ## アプリ概要
 このアプリは楽天でんわを使っている人向けのアプリです。
