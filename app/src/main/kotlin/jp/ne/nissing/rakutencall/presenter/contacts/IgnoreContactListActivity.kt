@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.net.toUri
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.android.support.DaggerAppCompatActivity
 import jp.ne.nissing.rakutencall.R
 import jp.ne.nissing.rakutencall.presenter.settings.SettingsActivity
@@ -34,6 +35,7 @@ class IgnoreContactListActivity : DaggerAppCompatActivity() {
         when (item!!.itemId) {
             R.id.menu_setting -> SettingsActivity.launch(this)
             R.id.menu_privacy_policy -> jumpToUri(getString(R.string.privacy_policy_url).toUri())
+            R.id.menu_licence -> startActivity(Intent(this, OssLicensesMenuActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

@@ -10,4 +10,8 @@
         android:id="@+id/menu_privacy_policy"
         android:title="@string/menu_privacy_policy"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_licence"
+        android:title="@string/licence"
+        app:showAsAction="never"/>
 </menu>

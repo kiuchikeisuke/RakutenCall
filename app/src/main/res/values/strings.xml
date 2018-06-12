@@ -18,6 +18,7 @@
     <!-- Menu Items -->
     <string name="menu_setting">設定</string>
     <string name="menu_privacy_policy">プライバシーポリシー</string>
+    <string name="licence">ライセンス</string>
 
     <!-- settings preference -->
     <string name="key_phone_app_list">phone_app_list</string>
