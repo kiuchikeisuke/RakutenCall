@@ -4,7 +4,6 @@
     <string name="app_name">らくでん</string>
     <string name="error">エラー</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
     <!-- Call -->
     <string name="call_not_found_app_error_dialog_message">正しくアプリを認識できませんでした。らくでんの設定から電話アプリを設定してください</string>
     <string name="call_illegal_telephone_number_dialog_message">無効な電話番号です:%1$s</string>
@@ -15,11 +14,11 @@
     <!-- Ignore Contact -->
     <string name="ignore_list_title">プレフィックスをつけない宛先をチェックしてください</string>
     <string name="contacts_permission_denied_toast">電話帳へのアクセスが拒否されたため、電話帳のデータが取得できませんでした</string>
+    
     <!-- Menu Items -->
     <string name="menu_setting">設定</string>
     <string name="menu_privacy_policy">プライバシーポリシー</string>
     <string name="licence">ライセンス</string>
-
     <!-- settings preference -->
     <string name="key_phone_app_list">phone_app_list</string>
     <string name="title_phone_app_list">起動する電話アプリ</string>
