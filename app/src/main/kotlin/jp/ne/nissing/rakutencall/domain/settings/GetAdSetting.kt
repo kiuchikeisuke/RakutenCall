@@ -9,10 +9,10 @@ import javax.inject.Inject
 
 class GetAdSetting @Inject constructor(
         private val settingDataSource: SettingDataSource,
-        executionThreads: ExecutionThreads)
+        private val executionThreads: ExecutionThreads)
     : OutputOnlyUseCase<GetAdSetting.Response, Throwable>(executionThreads) {
     override fun execute(): Observable<Response> {
-        return settingDataSource.getAdEnable().map { Response(it) }
+        return settingDataSource.getAdEnable().map { Response(it) }.subscribeOn(executionThreads.ui())
     }
 
     data class Response(val isEnable: Boolean) : UseCase.ResponseValue
