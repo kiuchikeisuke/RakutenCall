@@ -11,6 +11,8 @@ android {
 
     defaultConfig {
         applicationId "jp.ne.nissing.rakutencall"
+        versionCode 19
+        versionName "4.1.0"
         minSdkVersion 14
         targetSdkVersion 27
     }
