@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="jp.ne.nissing.rakutencall"
-          android:versionCode="18"
-          android:versionName="4.1.0">
+          package="jp.ne.nissing.rakutencall">
 
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
